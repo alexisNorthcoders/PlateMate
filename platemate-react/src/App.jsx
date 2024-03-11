@@ -1,5 +1,6 @@
 import './App.css'
-import Home from './Components/Home'
+import AboutPage from './Components/About'
+import { Hero } from './Components/Hero'
 import NavigationBar from './Components/NavigationBar'
 import { useState } from 'react'
 
@@ -8,7 +9,8 @@ function App() {
 
   return (<>
     <div className='sticky top-0 bg-white'><NavigationBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} /></div>
-    <Home/>
+    <Hero/>
+    <AboutPage/>
   </>)
 }
 

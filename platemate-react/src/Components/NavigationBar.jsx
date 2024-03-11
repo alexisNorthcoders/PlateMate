@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Auth } from './Auth';
 
-function NavigationBar({loggedIn,setLoggedIn}) {
+export default function NavigationBar({loggedIn,setLoggedIn}) {
 
 
   return (
-    <div >
+    <div className='bg-conifer-950 p-2'>
       <nav>
         <ul className='flex justify-between items-center'>
-          <li className='list-none'><a href="/">Home</a></li>
-          <li className='list-none'><a href="/about">About</a></li>
+          <li className='list-none text-white'>Home</li>
+          <li className='list-none text-white'>About</li>
           
             <li><Auth loggedIn={loggedIn} setLoggedIn={setLoggedIn} /></li>
         
@@ -21,4 +21,3 @@ function NavigationBar({loggedIn,setLoggedIn}) {
   );
 }
 
-export default NavigationBar;
