@@ -8,15 +8,16 @@ const Home = () => {
     ];
 
     return (
-        <div>
+        <section className="bg-conifer-900 text-white py-16 flex flex-col">
             <h1>Home Page</h1>
+            <p>Available Meals</p>
             {meals.map((meal) => (
                 <div key={meal.id}>
                     <h3>{meal.name}</h3>
                     <p>{meal.description}</p>
                 </div>
             ))}
-        </div>
+        </section>
     );
 };
 
