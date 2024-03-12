@@ -28,6 +28,7 @@ export const Auth = ({ loggedIn, setLoggedIn }) => {
       setErrorMessage('');
       setLoggedIn(true);
       setShowModal(false)
+      navigateTo('/Home'); 
 
     } catch (err) {
       console.log(err)
@@ -45,6 +46,7 @@ export const Auth = ({ loggedIn, setLoggedIn }) => {
       setPassword('');
       setErrorMessage('');
       setLoggedIn(true);
+      navigateTo('/Home');
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         setErrorMessage("Email already in use");
