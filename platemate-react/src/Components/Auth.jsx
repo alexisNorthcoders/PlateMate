@@ -1,9 +1,11 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 
 export const Auth = ({ loggedIn, setLoggedIn }) => {
+ const navigateTo = useNavigate(); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -60,7 +62,7 @@ export const Auth = ({ loggedIn, setLoggedIn }) => {
     try {
       await signOut(auth);
       setLoggedIn(false);
-      setSuccessMessage('Logged out successfully!');
+      navigateTo('/'); 
 
     } catch (err) {
       console.error(err);
