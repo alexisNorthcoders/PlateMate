@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { firebase } from "../config/firebase";
+import { database } from "../config/firebase";
+import {  ref,get } from 'firebase/database';
 
 const Profile = () => {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-  
-        const dbRef = firebase.database().ref('users');
-    
-        
-        dbRef.once('value', (snapshot) => {
-          setData(snapshot.val());
-        });
-      }, []);
+       
+        const dbRef = ref(database, 'users');
+        get(dbRef)
+          .then((snapshot) => {
+           
+            setData(snapshot.val());
+          })
+          .catch((error) => {
+            
+            console.error('Error fetching data:', error);
+          });
+      }, [database]);
     
     
     return (
