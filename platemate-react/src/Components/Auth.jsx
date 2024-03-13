@@ -2,6 +2,8 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 import { auth } from "../config/firebase";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { ref, set } from 'firebase/database';
+import { database } from "../config/firebase";
 
 
 export const Auth = ({ loggedIn, setLoggedIn }) => {
@@ -41,7 +43,12 @@ export const Auth = ({ loggedIn, setLoggedIn }) => {
   const signUp = async (e) => {
     e.preventDefault()
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      await set(ref(database, `users/${user.uid}`), {
+        email: user.email,
+        
+      });
       setEmail('');
       setPassword('');
       setErrorMessage('');

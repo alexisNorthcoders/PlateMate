@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function AboutPage() {
   return (
-    <section className="bg-conifer-950 text-white py-16 flex flex-col">
+    <section className="bg-conifer-900 text-white py-16 flex flex-col">
       <div className="container mx-auto text-center">
         <h2 className="text-xl lg:text-xl xl:text-3xl 2xl:text-6xl font-bold mb-4">About Plate Mate</h2>
         <div className="flex flex-col lg:flex-row items-center text-left">
