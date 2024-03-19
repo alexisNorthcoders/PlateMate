@@ -8,8 +8,8 @@ import { database } from "../config/firebase";
 
 export const Auth = ({ loggedIn, setLoggedIn }) => {
  const navigateTo = useNavigate(); 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("person1@example.com");
+  const [password, setPassword] = useState("password");
   const [errorMessage, setErrorMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
 
