@@ -7,7 +7,7 @@ import { database } from "../config/firebase";
 
 
 export const Auth = ({ loggedIn, setLoggedIn }) => {
- const navigateTo = useNavigate(); 
+  const navigateTo = useNavigate();
   const [email, setEmail] = useState("person1@example.com");
   const [password, setPassword] = useState("password");
   const [errorMessage, setErrorMessage] = useState("");
@@ -30,7 +30,7 @@ export const Auth = ({ loggedIn, setLoggedIn }) => {
       setErrorMessage('');
       setLoggedIn(true);
       setShowModal(false)
-      navigateTo('/Home'); 
+      navigateTo('/Home');
 
     } catch (err) {
       console.log(err)
@@ -47,7 +47,7 @@ export const Auth = ({ loggedIn, setLoggedIn }) => {
       const user = userCredential.user;
       await set(ref(database, `users/${user.uid}`), {
         email: user.email,
-        
+
       });
       setEmail('');
       setPassword('');
@@ -71,11 +71,27 @@ export const Auth = ({ loggedIn, setLoggedIn }) => {
     try {
       await signOut(auth);
       setLoggedIn(false);
-      navigateTo('/'); 
+      navigateTo('/');
 
     } catch (err) {
       console.error(err);
     }
+  };
+  const handleJohnClick = () => {
+    setEmail("person1@example.com");
+    setPassword("password")
+  };
+  const handleAliceClick = () => {
+    setEmail("person2@example.com");
+    setPassword("password")
+  };
+  const handleJaneClick = () => {
+    setEmail("person3@example.com");
+    setPassword("password")
+  };
+  const handleArthurClick = () => {
+    setEmail("person4@example.com");
+    setPassword("password")
   };
 
   return (
@@ -106,6 +122,7 @@ export const Auth = ({ loggedIn, setLoggedIn }) => {
                   <div className="bg-conifer-50  px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div className="sm:flex sm:items-start">
                       <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                        <div>Sign is as: <button className="bg-yellow-500 ml-1 rounded" onClick={handleJohnClick}>John</button><button className="bg-yellow-500 ml-1 rounded" onClick={handleAliceClick}>Alice</button><button className="bg-yellow-500 ml-1 rounded" onClick={handleArthurClick}>Arthur</button><button className="bg-yellow-500 ml-1 rounded" onClick={handleJaneClick}>Jane</button></div>
                         <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
                           Sign In
                         </h3>
@@ -137,14 +154,14 @@ export const Auth = ({ loggedIn, setLoggedIn }) => {
                     </div>
                   </div>
                   <div className="bg-conifer-50  px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                  <button
+                    <button
                       className="w-full bg-blue-500 text-white font-bold py-2 px-4 mb-1 rounded focus:outline-none hover:bg-blue-700 active:bg-blue-800 active:transform active:scale-95 transition-transform duration-150 sm:ml-3 sm:w-auto sm:text-sm"
                       onClick={signIn}
                     >
                       Log In
                     </button>
                     <button className="w-full bg-green-600 text-white font-bold py-2 px-4 mb-1 rounded focus:outline-none hover:bg-green-700 active:bg-green-800 active:transform active:scale-95 transition-transform duration-150  sm:ml-3 sm:w-auto sm:text-sm" onClick={signUp}> Register</button>
-                   
+
                     <button
                       type="button"
                       className="w-full bg-red-500 text-white font-bold py-2 px-4 mb-1 rounded focus:outline-none hover:bg-red-700 active:bg-red-800 active:transform active:scale-95 transition-transform duration-150 sm:ml-3 sm:w-auto sm:text-sm"

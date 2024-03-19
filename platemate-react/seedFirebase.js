@@ -37,10 +37,10 @@ const data = {
 
 };
 const meals = [
-    { name: "Pasta Meatballs", quantity: 2, url: `https://firebasestorage.googleapis.com/v0/b/platemate-3fe13.appspot.com/o/meatballs.jpeg?alt=media&token=054ce1a9-cf69-4a49-a9b3-d63017ce5cf3` },
-    { name: "Chicken Curry", quantity: 4 },
-    { name: "Chicken Fried Rice", quantity: 3 },
-    { name: "Steak Pie", quantity: 1 },
+    { name: "Pasta Meatballs", quantity: 2, description:`gluten, dairy`, url: `https://firebasestorage.googleapis.com/v0/b/platemate-3fe13.appspot.com/o/meatballs.jpeg?alt=media&token=054ce1a9-cf69-4a49-a9b3-d63017ce5cf3` },
+    { name: "Chicken Curry", quantity: 4,description:"dairy" ,url:`https://firebasestorage.googleapis.com/v0/b/platemate-3fe13.appspot.com/o/chickencurry.jpeg?alt=media&token=8bae6c83-37c6-4244-aeb6-d15545ae1c84`},
+    { name: "Chicken Fried Rice", quantity: 3, description:"gluten free", url:`https://firebasestorage.googleapis.com/v0/b/platemate-3fe13.appspot.com/o/chickenfriedrice.jpeg?alt=media&token=913e7150-b784-4301-9324-5829f1719bb6`},
+    { name: "Steak Pie", quantity: 1,description:"gluten",url:`https://firebasestorage.googleapis.com/v0/b/platemate-3fe13.appspot.com/o/steakalepie.jpeg?alt=media&token=67e0d227-05da-4bba-936a-f15e7783ce8e`},
 
 ]
 const users = [
@@ -97,10 +97,11 @@ async function seedUsers() {
             await set(ref(database, `meals/${i}`), {
                 name: meals[i].name,
                 quantity: meals[i].quantity,
+                description:meals[i].description,
                 userId: user.uid,
                 userName: users[i].name,
                 date: new Date().toISOString(),
-                url:meals[i].url || null
+                pictureUrl:meals[i].url || null
 
             });
         }
