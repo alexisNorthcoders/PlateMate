@@ -9,6 +9,7 @@ const Home = () => {
     const [meals, setMeals] = useState(null)
     const [user, loading, error] = useAuthState(auth);
     const { userData } = useContext(UserContext)
+    console.log(userData)
     useEffect(() => {
         const mealsRef = ref(database, `meals`);
         get(mealsRef).then((snapshot) => {
@@ -28,8 +29,9 @@ const Home = () => {
             await push(ref(database, "messages"), {
                 senderId: user.uid,
                 senderName: userData.name,
+                senderAvatar:userData.url,
                 receiverId: userId,
-                content: `Hi! I want to PlateMate your ${meal}. Are you interested?`,
+                content: `wants to PlateMate your ${meal}. Are you interested?`,
                 timestamp: currentDate.toISOString(),
             });
 

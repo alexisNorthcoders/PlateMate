@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import ErrorPage from './Components/ErrorPage.jsx';
 import Profile from './Components/Profile.jsx';
-import Chat from './Components/Chat.jsx';
+import Requests from './Components/Requests.jsx';
 import Calendar from './Components/Calendar.jsx';
 import UploadMeal from './Components/UploadMeal.jsx';
 import IndividualMeal from './Components/IndividualMeal.jsx';
@@ -37,8 +37,8 @@ const router = createBrowserRouter([
         element: <Calendar />,
       },
       {
-        path: "Chat",
-        element: <Chat />,
+        path: "Requests",
+        element: <Requests />,
       },
       {
         path: "UploadMeal",

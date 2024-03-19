@@ -41,7 +41,7 @@ export default function NavigationBar({ loggedIn, setLoggedIn }) {
         <ul className='items-center justify-center'>
           <li> <Link className='btn bg-conifer-700 hover:bg-conifer-800 active:bg-conifer-900 mb-2' to={loggedIn ? "Home" : "/"}>Home</Link></li>
           {loggedIn && <> <li> <Link className='btn bg-conifer-700 hover:bg-conifer-800 active:bg-conifer-900 mb-2' to={`Calendar`}>Calendar</Link></li>
-            <li> <Link className='btn bg-conifer-700 hover:bg-conifer-800 active:bg-conifer-900 mb-2' to={`Chat`}>Chat</Link></li>
+            <li> <Link className='btn bg-conifer-700 hover:bg-conifer-800 active:bg-conifer-900 mb-2' to={`Requests`}>Requests</Link></li>
             <li> <Link className='btn bg-conifer-700 hover:bg-conifer-800 active:bg-conifer-900 mb-2' to={`Profile`}>Profile</Link></li>
             <li> <Link className='btn bg-conifer-700 hover:bg-conifer-800 active:bg-conifer-900 mb-2' to={`UploadMeal`}>Upload Meal</Link></li></>}
 
