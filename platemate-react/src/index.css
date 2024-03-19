@@ -1,16 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 .btn {
-    display: inline-block;
-    padding: 8px 16px;
-    font-size: 16px;
-    font-weight: bold;
-    text-decoration: none;
-    color: white;
-    
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
+  display: flex;
+  height: 30px;
+  width: 65px;
+  font-size: 0.6rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.navigation-bar {
+  opacity: 0;
+  transform: translateX(-100%); 
+  transition: opacity 1s ease, transform 1s ease;
+ 
+}
+
+.navigation-bar.show {
+  opacity: 1; 
+  transform: translateY(0);
+}

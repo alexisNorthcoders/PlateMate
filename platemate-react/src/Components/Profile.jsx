@@ -75,12 +75,12 @@ const Profile = () => {
      
            
      <div className="mb-4 bg-black rounded-lg shadow-md p-4">
-        <p className="text-lg font-semibold mb-2">Current Meal</p>
+        <p className="text-lg font-semibold mb-2">My available meals:</p>
         {meals && 
             <div>
                 <p className="text-lg">Meal name: {meals.name}</p>
                 <p className="text-lg">Quantity: {meals.quantity}</p>
-                <img src={mealPictureUrl} alt="Profile" className="w-32 border-2 border-black rounded-full hover:border-yellow-300 shadow-lg" />
+                <img src={mealPictureUrl} alt="Profile" className="w-32 border-2 border-black shadow-lg" />
             </div>
         }
     </div>

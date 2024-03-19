@@ -83,7 +83,7 @@ export const Auth = ({ loggedIn, setLoggedIn }) => {
       {!loggedIn ? (
         <>
           <button
-            className="w-full bg-blue-500 text-white font-bold py-2 px-4 mb-1 rounded focus:outline-none hover:bg-blue-700 active:bg-blue-800 active:transform active:scale-95 transition-transform duration-150"
+            className="btn w-full bg-blue-500 text-white font-bold py-2 px-4 mb-1 rounded focus:outline-none hover:bg-blue-700 active:bg-blue-800 active:transform active:scale-95 transition-transform duration-150"
             onClick={openModal}
           >
             Signin
@@ -159,7 +159,7 @@ export const Auth = ({ loggedIn, setLoggedIn }) => {
             </div>
           )}
         </>
-      ) : <button className="w-full bg-gray-400 text-gray font-bold py-2 px-4 mb-1 rounded focus:outline-none hover:bg-gray-500 active:bg-gray-600 active:transform active:scale-95 transition-transform duration-150" onClick={logOut}> logOut</button>}
+      ) : <button className="btn w-full bg-gray-400 text-gray font-bold py-2 px-4 mb-1 rounded focus:outline-none hover:bg-gray-500 active:bg-gray-600 active:transform active:scale-95 transition-transform duration-150" onClick={logOut}> logOut</button>}
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
 
     </div>
