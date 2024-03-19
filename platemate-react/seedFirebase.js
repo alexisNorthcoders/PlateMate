@@ -37,17 +37,17 @@ const data = {
 
 };
 const meals = [
-    { name: "Pasta Meatballs", quantity: 2, url: `gs://platemate-3fe13.appspot.com/meatballs.jpeg` },
+    { name: "Pasta Meatballs", quantity: 2, url: `https://firebasestorage.googleapis.com/v0/b/platemate-3fe13.appspot.com/o/meatballs.jpeg?alt=media&token=054ce1a9-cf69-4a49-a9b3-d63017ce5cf3` },
     { name: "Chicken Curry", quantity: 4 },
     { name: "Chicken Fried Rice", quantity: 3 },
     { name: "Steak Pie", quantity: 1 },
 
 ]
 const users = [
-    { email: "person1@example.com", password: "password", name: "John", url: `gs://platemate-3fe13.appspot.com/avatar1.jpeg` },
-    { email: "person2@example.com", password: "password", name: "Alice", url: `gs://platemate-3fe13.appspot.com/avatar2.jpeg` },
-    { email: "person3@example.com", password: "password", name: "Jane", url: `gs://platemate-3fe13.appspot.com/avatar4.jpeg` },
-    { email: "person4@example.com", password: "password", name: "Arthur", url: `gs://platemate-3fe13.appspot.com/avatar3.jpeg` },
+    { email: "person1@example.com", password: "password", name: "John", url: `https://firebasestorage.googleapis.com/v0/b/platemate-3fe13.appspot.com/o/avatar1.jpeg?alt=media&token=29bceeda-a61c-4ce1-9793-5c86fd95a5c4` },
+    { email: "person2@example.com", password: "password", name: "Alice", url: `https://firebasestorage.googleapis.com/v0/b/platemate-3fe13.appspot.com/o/avatar2.jpeg?alt=media&token=cab8beb0-f39e-4936-a85c-433d906941b1` },
+    { email: "person3@example.com", password: "password", name: "Jane", url: `https://firebasestorage.googleapis.com/v0/b/platemate-3fe13.appspot.com/o/avatar4.jpeg?alt=media&token=e160ddbf-f797-4e1f-9d30-3936f7909c69` },
+    { email: "person4@example.com", password: "password", name: "Arthur", url: `https://firebasestorage.googleapis.com/v0/b/platemate-3fe13.appspot.com/o/avatar3.jpeg?alt=media&token=a0727d6e-b86a-497b-9dcc-a8cc21c3c647` },
 ]
 
 async function signIn(email,password) {
