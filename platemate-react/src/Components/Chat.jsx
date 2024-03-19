@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { database, auth, storage } from "../config/firebase";
 import { ref, get,set } from 'firebase/database';
-import { uploadBytesResumable, getDownloadURL, ref as storageRef } from 'firebase/storage';
+
 
 const Chat = () => {
     const [user, loading, error] = useAuthState(auth);
@@ -12,7 +12,7 @@ const Chat = () => {
         get(messagesRef).then((snapshot) => {
             const messagesData = Object.values(snapshot.val())
             const filteredMessages = messagesData.filter((messages)=> messages.receiverId === user.uid)
-            
+            console.log(filteredMessages)
             
             setMessages(filteredMessages)
         })
@@ -26,9 +26,9 @@ const Chat = () => {
             <h1>Chat</h1>
             {messages && messages.map((message,index)=>{
                 return (
-                <div key={`${message.receiverId}_${index}`} className="bg-conifer-800">
-                    <p>{message.senderId}:{message.content}</p>
-                    <p>{message.timestamp}</p>
+                <div key={`${message.receiverId}_${index}`} className="bg-conifer-200 text-black">
+                    <p>[{message.timestamp.substring(11,19)}] <span className='text-lg font-bold'>{message.senderName}</span>: {message.content}</p>
+                    <p></p>
                     </div>)
             })}
         
