@@ -6,7 +6,6 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import NavigationBar from './Components/NavigationBar.jsx';
 import ErrorPage from './Components/ErrorPage.jsx';
 import Profile from './Components/Profile.jsx';
 import Chat from './Components/Chat.jsx';
@@ -16,10 +15,12 @@ import IndividualMeal from './Components/IndividualMeal.jsx';
 import Home from './Components/Home.jsx';
 import Hero from './Components/Hero.jsx';
 import AboutPage from './Components/About.jsx';
+import { UserProvider } from './Components/UserContext'
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <App />,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Hero /> },
@@ -53,12 +54,14 @@ const router = createBrowserRouter([
       },
     ],
   },
-  
+
 ]);
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-      <RouterProvider router={router} />
+     <UserProvider>
+    <RouterProvider router={router} />
+    </UserProvider>
   </React.StrictMode>,
 )
