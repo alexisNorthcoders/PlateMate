@@ -1,22 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { database } from "../config/firebase";
+import { ref, get } from 'firebase/database';
+
 
 const Home = () => {
-  const meals = [
-        { id: 1, name: 'Meal 1', description: 'Description of Meal 1' },
-        { id: 2, name: 'Meal 2', description: 'Description of Meal 2' },
-        { id: 3, name: 'Meal 3', description: 'Description of Meal 3' },
-    ];
-
+    const [meals, setMeals] = useState(null)
+    useEffect(() => {
+        const mealsRef = ref(database, `meals`);
+        get(mealsRef).then((snapshot) => {
+            const mealsData = Object.values(snapshot.val())
+            console.log(mealsData)
+            setMeals(mealsData)
+        })
+            .catch((error) => {
+                console.error('Error fetching meals:', error);
+            });
+    }
+        , [])
     return (
         <section className="bg-conifer-900 text-white py-16 flex flex-col">
             <h1>Home Page</h1>
             <p>Available Meals</p>
-            {meals.map((meal) => (
-                <div key={meal.id}>
-                    <h3>{meal.name}</h3>
-                    <p>{meal.description}</p>
-                </div>
-            ))}
+            <div className="flex flex-wrap justify-around">
+                {meals && meals.map((meal, index) => {
+                    return (
+                        <div key={index} className="mb-4 bg-conifer-700 rounded-lg shadow-md p-4">
+                            <p className="text-xl">{meal.name}</p>
+                            <p className="text-sm">Available: {meal.quantity}</p>
+                            <p className="text-sm">Notes: {meal.description}</p>
+                            <p className="text-sm">Cook: {meal.userName}</p>
+                            <img src={meal.pictureUrl} alt="meal picture" className="w-32 border-2 rounded-lg border-conifer-800 shadow-lg" />
+                        </div>
+                    );
+                })}
+            </div>
         </section>
     );
 };
