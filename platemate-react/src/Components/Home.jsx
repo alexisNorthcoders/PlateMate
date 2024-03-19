@@ -12,7 +12,8 @@ const Home = () => {
         get(mealsRef).then((snapshot) => {
             const mealsData = Object.values(snapshot.val())
             console.log(mealsData)
-            setMeals(mealsData)
+            const filteredMeals = mealsData.filter((meal)=> meal.userId !== user.uid)
+            setMeals(filteredMeals)
         })
             .catch((error) => {
                 console.error('Error fetching meals:', error);
@@ -25,7 +26,7 @@ const Home = () => {
             await push(ref(database,"messages"),{
                 senderId: user.uid,
                 receiverId: userId,
-                content: `Hi! I wanted to PlateMate your ${meal}. Are you interested?`,
+                content: `Hi! I want to PlateMate your ${meal}. Are you interested?`,
                 timestamp: Date.now(),
             });
 
@@ -35,13 +36,13 @@ const Home = () => {
         }
     };
     return (
-        <section className="bg-conifer-900 text-white py-5 flex flex-col items-center">
+        <section className="bg-conifer-900 text-white py-5 h-full flex flex-col items-center">
 
             <h1 className="text-3xl mb-4">Available Meals</h1>
             <div className="flex flex-wrap justify-around">
                 {meals && meals.map((meal, index) => {
                     return (
-                        <div key={index} className="flex  flex-col mb-4 bg-conifer-700 rounded-lg shadow-md p-3 items-center">
+                        <div key={index} className="flex  flex-col mb-4 ml-2 bg-conifer-700 rounded-lg shadow-md p-3 items-center">
                             <p className="text-xl font">{meal.name}</p>
 
                             <p className="text-sm">Notes: {meal.description}</p>
