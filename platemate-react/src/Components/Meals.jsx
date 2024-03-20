@@ -3,8 +3,7 @@ import { database, auth, storage } from "../config/firebase";
 import { ref, set, get, push } from 'firebase/database';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
-
-
+import { DropdownMenu } from "./DropdownMenu";
 
 export const Meals = ({ requestMessage, closeModal, updateMessage }) => {
     const [meals, setMeals] = useState(null)
@@ -67,7 +66,7 @@ export const Meals = ({ requestMessage, closeModal, updateMessage }) => {
                                                     alt={`Picture of ${meal.name}`}
                                                     className={`w-44 rounded-lg shadow-md ${loadedImages[meal.id] ? 'visible' : 'hidden'}`}
                                                     onLoad={() => handleImageLoaded(meal.id)}
-                                                />
+                                                /><DropdownMenu/>
                                             </div>
                                         </div>
                                     );
@@ -76,6 +75,7 @@ export const Meals = ({ requestMessage, closeModal, updateMessage }) => {
                         </div>
                     </div>
                     <div className="bg-teal-800 py-1 flex flex-row justify-center">
+                        
 
                         <button onClick={() => { handleAccept(requestMessage.messageId) }} className=" bg-green-600 text-white font-bold py-2 px-4 mx-2 rounded focus:outline-none hover:bg-green-700 active:bg-green-800 active:transform active:scale-95 transition-transform duration-150  sm:w-auto sm:text-sm" > Accept</button>
 
