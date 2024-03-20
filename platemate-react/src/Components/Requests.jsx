@@ -52,14 +52,14 @@ const Requests = () => {
     }
         , [])
     return (
-        <section className="bg-gradient-to-b from-conifer-900 via-conifer-700 to-conifer-900 text-white py-5 flex flex-col h-full">
+        <section className="bg-gradient-to-b from-teal-900 via-teal-700 to-teal-900 text-white py-5 flex flex-col h-full">
             {showModal && <Meals requestMessage={requestMessage} closeModal={closeModal} updateMessage={updateMessage} />}
             <h1>Requests</h1>
             {messages && messages.map((message, index) => {
                 return (
-                    <div key={`${message.receiverId}_${index}`} className="bg-conifer-200  shadow-conifer-900 shadow-inner text-black flex flex-col items-center pb-1 pt-1 pl-1 mb-0.5">
+                    <div key={`${message.receiverId}_${index}`} className="bg-teal-200  shadow-teal-900 shadow-inner text-black flex flex-col items-center pb-1 pt-1 pl-1 mb-0.5">
                         <div className="flex flex-row justify-center"> <img src={message.senderAvatar} alt="sender avatar picture" className='w-10 rounded-full shadow-md' /><p>[{message.timestamp.substring(11, 19)}] <span className='text-lg font-bold'>{message.senderName}</span> {message.content}</p></div>
-                        <div className="flex justify-center bg-conifer-300 w-fit rounded-sm shadow-conifer-600 shadow-inner"> {message.status ? <p className='text-green-900 font-bold'>You have already {message.status} this offer.</p> : <button className='btn bg-blue-600 hover:bg-blue-700 active:bg-blue-800 active:transform active:scale-95 transition-transform duration-150 ' onClick={(e) => { handleAccept(e, message) }}>View Offer</button>}  </div>
+                        <div className="flex justify-center bg-teal-300 w-fit rounded-sm shadow-teal-600 shadow-inner"> {message.status ? <p className='text-green-900 font-bold'>You have already {message.status} this offer.</p> : <button className='btn bg-blue-600 hover:bg-blue-700 active:bg-blue-800 active:transform active:scale-95 transition-transform duration-150 ' onClick={(e) => { handleAccept(e, message) }}>View Offer</button>}  </div>
                     </div>)
 
             })}

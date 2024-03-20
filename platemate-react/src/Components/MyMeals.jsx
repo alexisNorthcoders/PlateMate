@@ -3,7 +3,7 @@ import { database, auth, storage } from "../config/firebase";
 import { ref, get } from 'firebase/database';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-const Profile = () => {
+export const MyMeals=()=>{
     const [profilePictureUrl, setProfilePictureUrl] = useState(null);
     const [data, setData] = useState(null);
     const [user, loading, error] = useAuthState(auth);
@@ -34,31 +34,22 @@ const Profile = () => {
                 });
         }
     }, [user]);
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    }
-    if (!user) {
-        return <div>Please sign in to view your profile.</div>;
-    }
-    return (
-        <section className="bg-teal-900 text-white py-5 flex flex-col items-center h-full">
-            <h1 className='text-3xl font-bold'>Profile</h1>
-
-            {data &&
-                <div className="flex items-center">
-                    <img src={profilePictureUrl} alt="Profile" className="w-32 border-2 border-black rounded-full hover:border-yellow-300 shadow-lg" />
-                    <ul>
-                        <li><p className="text-lg">Name: {data.name}</p></li>
-                        <li><p className="text-lg">Email: {data.email}</p></li>
-                    </ul>
+    return (<>
+    {meals && meals.map((meal, index) => {
+        return (
+            <article key={index} className="text-black p-0.5 mx-2 my-4 max-w-sm bg-gradient-to-br from-teal-200 via-teal-600 to-teal-900 rounded-lg shadow-lg items-center">
+                <div className="bg-white  p-5 rounded-lg hover:bg-green-50 flex flex-col items-center">
+                <p className="text-xl  border-b-2 border-teal-300 ">{meal.name}</p>
+    
+                <p className="text-sm ">Notes: {meal.description}</p>
+                
+                <img src={meal.pictureUrl} alt="meal picture" className="w-32 border-2 rounded-lg border-teal-800 shadow-lg" />
+                <p className="text-sm ">Quantity: {meal.quantity}</p>
+                
                 </div>
-            }
-          
-        </section>
-    );
-};
+            </article>
+        );
+    })}
+   </>)
+}
 
-export default Profile;

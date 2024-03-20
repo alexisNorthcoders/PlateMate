@@ -3,6 +3,7 @@ import { database, auth, storage } from "../config/firebase";
 import { ref, set, get, push } from 'firebase/database';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { UserContext } from '../Components/UserContext';
+import { MyMeals } from './MyMeals';
 
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
             console.log(mealsData)
             const filteredMeals = mealsData.filter((meal) => meal.userId !== user.uid)
             setMeals(filteredMeals)
+            console.log(filteredMeals, "filtered meals")
         })
             .catch((error) => {
                 console.error('Error fetching meals:', error);
@@ -29,7 +31,7 @@ const Home = () => {
             await push(ref(database, "messages"), {
                 senderId: user.uid,
                 senderName: userData.name,
-                senderAvatar:userData.url,
+                senderAvatar: userData.url,
                 receiverId: userId,
                 content: `wants to PlateMate your ${meal}. Are you interested?`,
                 timestamp: currentDate.toISOString(),
@@ -40,28 +42,36 @@ const Home = () => {
 
         }
     };
-    return (
-        <section className="bg-conifer-900 text-white py-5 h-full flex flex-col items-center">
+    return (<>
+        <section className="bg-gradient-to-b from-slate-200 to-slate-300  text-teal-950 py-5 flex flex-col items-center">
 
-            <h1 className="text-3xl mb-4 font-light">Available Meals</h1>
+            <h1 className="text-3xl mb-4 ">Available Meals</h1>
             <div className="flex flex-wrap justify-around">
                 {meals && meals.map((meal, index) => {
                     return (
-                        <article key={index} className="p-0.5 mx-2 my-4 max-w-sm bg-gradient-to-r from-conifer-800 via-conifer-100 to-conifer-950 rounded-lg shadow-md items-center">
-                            <div className="bg-gradient-to-br from-conifer-700  to-conifer-800  p-5 rounded-lg">
-                            <p className="text-xl text-conifer-100 font-light border-b-2 border-conifer-300">{meal.name}</p>
+                        <article key={index} className="text-black p-0.5 mx-2 my-4 max-w-sm bg-gradient-to-br from-teal-200 via-teal-600 to-teal-900 rounded-lg shadow-lg items-center">
+                            <div className="bg-white  p-5 rounded-lg hover:bg-green-50 flex flex-col items-center">
+                                <p className="text-xl  border-b-2 border-teal-300 ">{meal.name}</p>
 
-                            <p className="text-sm font-light text-conifer-100">Notes: {meal.description}</p>
-                            <p className="text-sm font-light text-conifer-100">Cook: {meal.userName}</p>
-                            <img src={meal.pictureUrl} alt="meal picture" className="w-32 border-2 rounded-lg border-conifer-800 shadow-lg" />
-                            <p className="text-sm font-light text-conifer-100">Available: {meal.quantity}</p>
-                            <button onClick={() => { sendMessage(meal.userId, meal.name) }} className='font-bold text-conifer-100 bg-conifer-600 border-opacity-15 border-2  border-conifer-100 drop-shadow-md shadow-conifer-950 p-1 rounded-lg  text-sm hover:bg-conifer-700 active:bg-conifer-800'>PlateMate Request</button>
+                                <p className="text-sm ">Notes: {meal.description}</p>
+                                <p className="text-sm ">Cook: {meal.userName}</p>
+                                <img src={meal.pictureUrl} alt="meal picture" className="w-32 border-2 rounded-lg border-teal-800 shadow-lg" />
+                                <p className="text-sm ">Quantity: {meal.quantity}</p>
+                                <button onClick={() => { sendMessage(meal.userId, meal.name) }} className='font-bold text-teal-100 bg-teal-600 border-opacity-15 border-2  border-teal-100 drop-shadow-md shadow-teal-950 p-1 rounded-lg  text-sm hover:bg-teal-700 active:bg-teal-800'>PlateMate Request</button>
                             </div>
                         </article>
                     );
                 })}
+
             </div>
         </section>
+        <section className="bg-gradient-to-b from-slate-300 to-slate-400  text-teal-950 py-5 flex flex-col items-center">
+            <h1 className="text-3xl mb-4">My Meals</h1>
+            <div className="flex flex-wrap justify-around">
+                <MyMeals />
+            </div>
+        </section>
+    </>
     );
 };
 

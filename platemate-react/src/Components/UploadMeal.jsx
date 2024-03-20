@@ -67,7 +67,7 @@ const UploadMeal = () => {
     };
 
     return (
-        <section className="bg-conifer-900 text-white py-5 flex flex-col items-center">
+        <section className="bg-teal-900 text-white py-5 flex flex-col items-center h-full">
             <h1 className="text-3xl mb-8">Upload your Meal</h1>
             <form className="w-full max-w-sm" onSubmit={handleSubmit}>
                 <div className="mb-4">

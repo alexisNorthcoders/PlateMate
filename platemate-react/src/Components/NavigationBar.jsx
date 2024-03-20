@@ -35,15 +35,15 @@ export default function NavigationBar({ loggedIn, setLoggedIn }) {
   }, [user]);
 
   return (
-    <div className='bg-conifer-950 p-2 h-screen flex justify-center '>
+    <div className='bg-teal-950 p-2 h-screen flex justify-center '>
       <nav>
         {user && <img src={profilePictureUrl} alt="Profile" className="w-12 border-2 border-black rounded-full hover:border-yellow-300 shadow-lg ml-2 "/>}
         <ul className='items-center justify-center'>
-          <li> <Link className='btn bg-conifer-700 hover:bg-conifer-800 active:bg-conifer-900 mb-2' to={loggedIn ? "Home" : "/"}>Home</Link></li>
-          {loggedIn && <> <li> <Link className='btn bg-conifer-700 hover:bg-conifer-800 active:bg-conifer-900 mb-2' to={`Calendar`}>Calendar</Link></li>
-            <li> <Link className='btn bg-conifer-700 hover:bg-conifer-800 active:bg-conifer-900 mb-2' to={`Requests`}>Requests</Link></li>
-            <li> <Link className='btn bg-conifer-700 hover:bg-conifer-800 active:bg-conifer-900 mb-2' to={`Profile`}>Profile</Link></li>
-            <li> <Link className='btn bg-conifer-700 hover:bg-conifer-800 active:bg-conifer-900 mb-2' to={`UploadMeal`}>Upload Meal</Link></li></>}
+          <li> <Link className='btn bg-teal-700 hover:bg-teal-800 active:bg-teal-900 mb-2' to={loggedIn ? "Home" : "/"}>Home</Link></li>
+          {loggedIn && <> <li> <Link className='btn bg-teal-700 hover:bg-teal-800 active:bg-teal-900 mb-2' to={`Calendar`}>Calendar</Link></li>
+            <li> <Link className='btn bg-teal-700 hover:bg-teal-800 active:bg-teal-900 mb-2' to={`Requests`}>Requests</Link></li>
+            <li> <Link className='btn bg-teal-700 hover:bg-teal-800 active:bg-teal-900 mb-2' to={`Profile`}>Profile</Link></li>
+            <li> <Link className='btn bg-teal-700 hover:bg-teal-800 active:bg-teal-900 mb-2' to={`UploadMeal`}>Upload Meal</Link></li></>}
 
           <li><Auth loggedIn={loggedIn} setLoggedIn={setLoggedIn} /></li>
 

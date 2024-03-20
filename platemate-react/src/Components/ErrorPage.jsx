@@ -5,7 +5,7 @@ export default function ErrorPage() {
   console.error(error);
 
   return (
-    <section className="bg-conifer-900 text-white py-16 flex flex-col items-center">
+    <section className="bg-teal-900 text-white py-16 flex flex-col items-center">
     <div >
       <h1 className="text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold mb-4">Oops!</h1>
 

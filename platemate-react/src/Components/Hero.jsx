@@ -10,7 +10,7 @@ function Hero() {
 
     ];
     return (
-        <section className="hero bg-conifer-900 text-white py-16 flex flex-col">
+        <section className="hero bg-teal-900 text-white py-16 flex flex-col">
             <div className="container mx-auto flex items-center">
                 <div className="w-1/2">
                     <img src="./toa-heftiba-6bKpHAun4d8-unsplash.jpg" alt="People eating in a office canteen" className="mx-auto shadow-lg rounded-lg w-80vw" />
@@ -18,7 +18,7 @@ function Hero() {
                 <div className="w-1/2 ml-5 text-center">
                     <h1 className="text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold mb-4 ">Share Your Meal Prep with Friends and Coworkers</h1>
                     <p className="text-base lg:text-lg xl:text-xl 2xl:text-2xl mb-8">Transform meal prep into a social experience with Plate Mate. Connect with friends and coworkers, share your favorite recipes, and enjoy healthier meals together.</p>
-                    <button className="text-base lg:text-lg xl:text-xl 2xl:text-2xl bg-conifer-600 hover:bg-conifer-700 active:bg-conifer-950 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out"><Link to={"about"}>Learn More</Link></button>
+                    <button className="text-base lg:text-lg xl:text-xl 2xl:text-2xl bg-teal-600 hover:bg-teal-700 active:bg-teal-950 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out"><Link to={"about"}>Learn More</Link></button>
                 </div>
             </div>
 
