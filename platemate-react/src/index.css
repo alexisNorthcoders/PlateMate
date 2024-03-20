@@ -27,3 +27,8 @@
   opacity: 1; 
   transform: translateY(0);
 }
+.flex-container {
+  display: flex;
+  align-items: flex-start; /* Aligns the item to the start of the cross axis */
+  justify-content: center; /* Centers the children along the main axis */
+}

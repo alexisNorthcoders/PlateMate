@@ -45,7 +45,7 @@ export const Meals = ({ requestMessage, closeModal,updateMessage }) => {
                     role="dialog"
                     aria-modal="true"
                     aria-labelledby="modal-headline"
-                > <div className="flex flex-row justify-between items-center"><h1 className="py-1 ml-2">Available meal</h1><FontAwesomeIcon icon={faXmark} onClick={closeModal} className="mr-2 bg-red-500 rounded-sm px-0.5 shadow-lg hover:bg-red-600 active:bg-red-700" /></div>
+                > <div className="flex flex-row justify-between items-center"><h1 className="py-1 ml-2">Available meal</h1><FontAwesomeIcon icon={faXmark} onClick={closeModal} className="mr-2 bg-red-500 rounded-sm px-0.5 shadow-lg hover:bg-red-600 active:bg-red-700 active:transform active:scale-75 transition-transform duration-150 " /></div>
                     <div className="bg-conifer-900  px-4 border-conifer-700 border-t-2 border-b-2 pb-2">
                         
                         <div className="flex flex-col align-middle items-center">
