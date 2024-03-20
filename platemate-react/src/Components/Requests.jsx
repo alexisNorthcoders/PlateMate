@@ -52,7 +52,7 @@ const Requests = () => {
     }
         , [])
     return (
-        <section className="bg-conifer-900 text-white py-5 flex flex-col h-full ">
+        <section className="bg-gradient-to-b from-conifer-900 via-conifer-700 to-conifer-900 text-white py-5 flex flex-col h-full">
             {showModal && <Meals requestMessage={requestMessage} closeModal={closeModal} updateMessage={updateMessage} />}
             <h1>Requests</h1>
             {messages && messages.map((message, index) => {
