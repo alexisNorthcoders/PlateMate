@@ -4,8 +4,8 @@ const Calendar = () => {
   
 
     return (
-        <section className="bg-teal-900 text-white py-16 flex flex-col">
-            <h1>Calendar</h1>
+        <section className="bg-gradient-to-b from-slate-200 to-slate-300  text-teal-950 py-5 flex flex-col items-center h-full">
+            <h1 className="text-3xl mb-4">Calendar</h1>
         
         </section>
     );

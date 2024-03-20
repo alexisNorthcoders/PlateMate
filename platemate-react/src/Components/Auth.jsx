@@ -1,9 +1,12 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { ref, set } from 'firebase/database';
 import { database } from "../config/firebase";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRightFromBracket,faRightToBracket } from '@fortawesome/free-solid-svg-icons'
+
 
 
 export const Auth = ({ loggedIn, setLoggedIn }) => {
@@ -101,8 +104,7 @@ export const Auth = ({ loggedIn, setLoggedIn }) => {
           <button
             className="btn w-full bg-blue-500 text-white font-bold py-2 px-4 mb-1 rounded focus:outline-none hover:bg-blue-700 active:bg-blue-800 active:transform active:scale-95 transition-transform duration-150"
             onClick={openModal}
-          >
-            Signin
+          ><div className="flex flex-row justify-between items-center"><span className=""></span><span className="">Log In</span><FontAwesomeIcon className=""icon={faRightToBracket} /></div>
           </button>
           {showModal && (
             <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -119,7 +121,7 @@ export const Auth = ({ loggedIn, setLoggedIn }) => {
                   aria-modal="true"
                   aria-labelledby="modal-headline"
                 >
-                  <div className="bg-conifer-50  px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                  <div className="bg-teal-700  px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div className="sm:flex sm:items-start">
                       <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                         <div>Sign is as: <button className="bg-yellow-500 ml-1 rounded" onClick={handleJohnClick}>John</button><button className="bg-yellow-500 ml-1 rounded" onClick={handleAliceClick}>Alice</button><button className="bg-yellow-500 ml-1 rounded" onClick={handleArthurClick}>Arthur</button><button className="bg-yellow-500 ml-1 rounded" onClick={handleJaneClick}>Jane</button></div>
@@ -153,8 +155,8 @@ export const Auth = ({ loggedIn, setLoggedIn }) => {
                       </div>
                     </div>
                   </div>
-                  <div className="bg-conifer-50  px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button
+                  <div className="bg-teal-800  px-4 py-3 sm:px-6 sm:flex sm:flex-row">
+                    <button type="submit"
                       className="w-full bg-blue-500 text-white font-bold py-2 px-4 mb-1 rounded focus:outline-none hover:bg-blue-700 active:bg-blue-800 active:transform active:scale-95 transition-transform duration-150 sm:ml-3 sm:w-auto sm:text-sm"
                       onClick={signIn}
                     >
@@ -176,7 +178,7 @@ export const Auth = ({ loggedIn, setLoggedIn }) => {
             </div>
           )}
         </>
-      ) : <button className="btn w-full bg-gray-400 text-gray font-bold py-2 px-4 mb-1 rounded focus:outline-none hover:bg-gray-500 active:bg-gray-600 active:transform active:scale-95 transition-transform duration-150" onClick={logOut}> logOut</button>}
+      ) : <button className="text-lg font-bold w-full bg-gray-400 text-gray py-2 px-4 mb-1 rounded focus:outline-none hover:bg-gray-500 active:bg-gray-600 active:transform active:scale-95 transition-transform duration-150" onClick={logOut}><FontAwesomeIcon icon={faArrowRightFromBracket} /> Sign Out</button>}
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
 
     </div>

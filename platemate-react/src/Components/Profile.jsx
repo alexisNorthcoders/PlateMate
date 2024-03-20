@@ -44,8 +44,8 @@ const Profile = () => {
         return <div>Please sign in to view your profile.</div>;
     }
     return (
-        <section className="bg-teal-900 text-white py-5 flex flex-col items-center h-full">
-            <h1 className='text-3xl font-bold'>Profile</h1>
+        <section className="bg-gradient-to-b from-slate-200 to-slate-300  text-teal-950 py-5 flex flex-col items-center h-full">
+            <h1 className="text-3xl mb-4">Profile</h1>
 
             {data &&
                 <div className="flex items-center">

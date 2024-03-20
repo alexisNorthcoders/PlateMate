@@ -10,7 +10,7 @@ function Hero() {
 
     ];
     return (
-        <section className="hero bg-teal-900 text-white py-16 flex flex-col">
+        <section className="hero bg-teal-900 text-white py-5 flex flex-col h-full">
             <div className="container mx-auto flex items-center">
                 <div className="w-1/2">
                     <img src="./toa-heftiba-6bKpHAun4d8-unsplash.jpg" alt="People eating in a office canteen" className="mx-auto shadow-lg rounded-lg w-80vw" />
