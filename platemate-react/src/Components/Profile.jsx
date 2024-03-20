@@ -44,7 +44,7 @@ const Profile = () => {
         return <div>Please sign in to view your profile.</div>;
     }
     return (
-        <section className="bg-conifer-900 text-white py-16 flex flex-col items-center">
+        <section className="bg-conifer-900 text-white py-5 flex flex-col items-center">
             <h1 className='text-3xl font-bold'>Profile</h1>
 
             {data &&
