@@ -46,26 +46,26 @@ export const Meals = ({ requestMessage, closeModal, updateMessage }) => {
                     &#8203;
                 </span>
                 <div
-                    className="inline-block align-bottom bg-teal-800 rounded-lg text-center text-lg overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xs sm:w-full"
+                    className="inline-block align-bottom bg-teal-400 rounded-lg text-center text-lg overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xs sm:w-full"
                     role="dialog"
                     aria-modal="true"
                     aria-labelledby="modal-headline"
-                > <div className="flex flex-row justify-between items-center"><h1 className="py-1 ml-2">Available meal</h1><FontAwesomeIcon icon={faXmark} onClick={closeModal} className="mr-2 bg-red-500 rounded-sm px-0.5 shadow-lg hover:bg-red-600 active:bg-red-700 active:transform active:scale-75 transition-transform duration-150 " /></div>
-                    <div className="bg-teal-900  px-4 border-teal-700 border-t-2 border-b-2 pb-2">
+                > <div className="flex flex-row justify-between items-center"><h1 className="py-1 ml-2">Available meals</h1><FontAwesomeIcon icon={faXmark} onClick={closeModal} className="mr-2 bg-red-500 text-white rounded-sm px-0.5 shadow-lg hover:bg-red-600 active:bg-red-700 active:transform active:scale-75 transition-transform duration-150 " /></div>
+                    <div className="bg-teal-100  px-4 border-teal-700 border-t-2 border-b-2 pb-2">
 
                         <div className="flex flex-col align-middle items-center">
                             <div className="mt-3 ">
 
                                 {meals && meals.map((meal) => {
                                     return (
-                                        <div key={meal.id}>
-                                            <h2 className="text-sm">{meal.name}</h2>
+                                        <div key={meal.id} className="flex flex-col shadow-lg rounded-lg mb-2">
+                                            <h2 className="">{meal.name}</h2>
                                             <div className={loadedImages[meal.id] ? '' : 'image-placeholder'}>
                                                 {!loadedImages[meal.id] && <div className="spinner"></div>} 
                                                 <img
                                                     src={meal.pictureUrl}
                                                     alt={`Picture of ${meal.name}`}
-                                                    className={`w-32 rounded-lg shadow-md ${loadedImages[meal.id] ? 'visible' : 'hidden'}`}
+                                                    className={`w-44 rounded-lg shadow-md ${loadedImages[meal.id] ? 'visible' : 'hidden'}`}
                                                     onLoad={() => handleImageLoaded(meal.id)}
                                                 />
                                             </div>
