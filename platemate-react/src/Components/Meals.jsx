@@ -9,8 +9,7 @@ export const Meals = ({ requestMessage, closeModal, updateMessage }) => {
     const [meals, setMeals] = useState(null)
     const [loadedImages, setLoadedImages] = useState({});
     const [isAccept, setIsAccept] = useState(false)
-    const [day, setDay] = useState(null)
-
+    
     const handleImageLoaded = (mealId) => {
         setLoadedImages({ ...loadedImages, [mealId]: true });
     };
@@ -34,8 +33,8 @@ export const Meals = ({ requestMessage, closeModal, updateMessage }) => {
         await updateMessage(requestMessage.messageId, "declined")
         closeModal()
     }
-    const handleAccept = async (day) => {
-        await updateMessage(requestMessage.messageId, "accepted",day)
+    const handleAccept = async (day,mealId) => {
+        await updateMessage(requestMessage.messageId, "accepted",day,meals[0])
         closeModal()
     }
 
@@ -54,15 +53,15 @@ export const Meals = ({ requestMessage, closeModal, updateMessage }) => {
                     aria-modal="true"
                     aria-labelledby="modal-headline"
                 > <div className="flex flex-row justify-between items-center"><h1 className="py-1 ml-2">{isAccept ? "Choose the day" : "Available meals"}</h1><FontAwesomeIcon icon={faXmark} onClick={closeModal} className="mr-2 bg-red-500 text-white rounded-sm px-0.5 shadow-lg hover:bg-red-600 active:bg-red-700 active:transform active:scale-75 transition-transform duration-150 " /></div>
-                    <div className="bg-teal-100  px-4 border-teal-700 border-t-2 border-b-2 pb-2">
-                        {isAccept && <DropdownMenu handleAccept={handleAccept} />}
-                        <div className={`flex flex-col align-middle items-center ${isAccept ? "hidden" : null}`}>
+                    <div className="bg-teal-100  px-4 border-teal-700 border-t-2 border-b-2 pb-2 ">
+                        
+                        <div className={`flex flex-col align-middle items-center`}>
                             <div className="mt-3 ">
 
                                 {meals && meals.map((meal) => {
                                     return (
-                                        <div key={meal.id} className="flex flex-col shadow-lg rounded-lg mb-2">
-                                            <h2 className="">{meal.name}</h2>
+                                        <div key={meal.id} className="flex flex-col shadow-lg rounded-lg mb-2 ">
+                                            {isAccept ? <DropdownMenu handleAccept={handleAccept} mealId={meal.id} /> : <><h2 className="">{meal.name}</h2>
                                             <div className={loadedImages[meal.id] ? '' : 'image-placeholder'}>
                                                 {!loadedImages[meal.id] && <div className="spinner"></div>}
                                                 <img
@@ -71,7 +70,8 @@ export const Meals = ({ requestMessage, closeModal, updateMessage }) => {
                                                     className={`w-44 rounded-lg shadow-md ${loadedImages[meal.id] ? 'visible' : 'hidden'}`}
                                                     onLoad={() => handleImageLoaded(meal.id)}
                                                 />
-                                            </div>
+                                            </div></>}
+                                           
                                         </div>
                                     );
                                 })}

@@ -80,7 +80,7 @@ const Home = () => {
                                 <p className="text-sm ">Cook: {meal.userName}</p>
                                 <img src={meal.pictureUrl} alt="meal picture" className="w-32 border-2 rounded-lg border-teal-800 shadow-lg" />
                                 <p className="text-sm ">Quantity: {meal.quantity}</p>
-                             {isRequestSent[meal.mealId] || userData.shared_meals[meal.mealId] ? <button className='font-bold text-teal-100 bg-teal-950 border-opacity-15 border-2  border-teal-100 drop-shadow-md shadow-teal-950 p-1 rounded-lg  text-sm hover:bg-teal-700 active:bg-teal-800 '>Request Sent</button> : <button onClick={() => { handleClickRequest(meal.userId, meal) }} className='font-bold text-teal-100 bg-teal-600 border-opacity-15 border-2  border-teal-100 drop-shadow-md shadow-teal-950 p-1 rounded-lg  text-sm hover:bg-teal-700 active:bg-teal-800 '>PlateMate Request</button>}   
+                             {isRequestSent[meal.mealId] || (userData.shared_meals && userData.shared_meals[meal.mealId]) ? <button className='font-bold text-teal-100 bg-teal-950 border-opacity-15 border-2  border-teal-100 drop-shadow-md shadow-teal-950 p-1 rounded-lg  text-sm hover:bg-teal-700 active:bg-teal-800 '>Request Sent</button> : <button onClick={() => { handleClickRequest(meal.userId, meal) }} className='font-bold text-teal-100 bg-teal-600 border-opacity-15 border-2  border-teal-100 drop-shadow-md shadow-teal-950 p-1 rounded-lg  text-sm hover:bg-teal-700 active:bg-teal-800 '>PlateMate Request</button>}   
                             </div>
                         </article>
                     );

@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { database, auth, storage } from "../config/firebase";
 import { ref, get, set, update ,remove} from 'firebase/database';
 import { Meals } from './Meals';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { UserContext } from '../Components/UserContext';
 
 
 const Requests = () => {
@@ -12,6 +13,7 @@ const Requests = () => {
     const [messages, setMessages] = useState(null)
     const [showModal, setShowModal] = useState(false)
     const [requestMessage, setRequestMessage] = useState(null)
+    const { userData } = useContext(UserContext)
 
     const handleAccept = (e, message) => {
         e.preventDefault();
@@ -22,12 +24,27 @@ const Requests = () => {
     const closeModal = () => {
         setShowModal(false);
     };
-    const updateMessage = (messageId, newStatus,day) => {
+    const updateUserMealShares = async ( mealId,senderMeal,day) => {
+        const userRef = ref(database, `users/${user.uid}/shared_meals/`);
+        
+        await update(userRef,{ [mealId]:`Accepted, giving meal to ${senderMeal.userName} on ${day}`})
+        await update(userRef,{[senderMeal.mealId]:`Accepted, receiving meal from ${senderMeal.userName} on ${day}`})   
+    };
+    const updateSenderMealShares = async (mealId,senderMeal,day)=>{
+        const senderRef = ref(database, `users/${requestMessage.senderId}/shared_meals/`);
+        
+        await update(senderRef,{ [mealId]:`Accepted, receiving meal from ${userData.name} on ${day}`})
+        await update(senderRef,{ [senderMeal.mealId]:`Accepted, giving meal to ${userData.name} on ${day}`})
+           
+    }
+    const updateMessage = (messageId, newStatus,day,senderMeal) => {
         const messageRef = ref(database, `messages/${messageId}`);
-
-        update(messageRef, { status: newStatus,day:day||null })
+console.log(senderMeal, "<-- senderMeal")
+        update(messageRef, { status: newStatus })
             .then(() => {
                 console.log("Message updated successfully");
+                updateUserMealShares(requestMessage.mealId,senderMeal,day)
+                updateSenderMealShares(requestMessage.mealId,senderMeal,day)
             })
             .catch((error) => {
                 console.error("Error updating message:", error);

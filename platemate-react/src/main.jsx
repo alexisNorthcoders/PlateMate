@@ -13,7 +13,6 @@ import Profile from './Components/Profile.jsx';
 import Requests from './Components/Requests.jsx';
 import Calendar from './Components/Calendar.jsx';
 import UploadMeal from './Components/UploadMeal.jsx';
-import IndividualMeal from './Components/IndividualMeal.jsx';
 import Home from './Components/Home.jsx';
 import Hero from './Components/Hero.jsx';
 import AboutPage from './Components/About.jsx';
@@ -47,10 +46,7 @@ const router = createBrowserRouter([
         path: "UploadMeal",
         element: <UploadMeal />,
       },
-      {
-        path: "meal/:id",
-        element: <IndividualMeal />,
-      },
+    
       {
         path: "home",
         element: <Home />,
