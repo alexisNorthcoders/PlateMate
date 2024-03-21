@@ -72,7 +72,7 @@ const Home = () => {
             <div className="flex flex-wrap justify-around">
                 {meals && meals.map((meal, index) => {
                     return (
-                        <article key={index} className="text-black p-0.5 mx-2 my-4 max-w-sm bg-gradient-to-br from-teal-200 via-teal-600 to-teal-900 rounded-lg shadow-lg items-center">
+                        <article key={index} className="text-black w-[230px]  p-0.5 mx-2 my-4 max-w-sm bg-gradient-to-br from-teal-200 via-teal-600 to-teal-900 rounded-lg shadow-lg items-center">
                             <div className="bg-white  p-5 rounded-lg hover:bg-green-50 flex flex-col items-center">
                                 <p className="text-xl  border-b-2 border-teal-300 ">{meal.name}</p>
 

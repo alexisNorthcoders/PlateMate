@@ -3,8 +3,9 @@ import { database, auth, storage } from "../config/firebase";
 import { ref, set, get, push, update } from 'firebase/database';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { UserContext } from '../Components/UserContext';
-import { MyMeals } from './MyMeals';
 import { IndividualMeal } from './IndividualMealCard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRightLeft } from '@fortawesome/free-solid-svg-icons'
 
 const Calendar = () => {
     const [user, loading, error] = useAuthState(auth);
@@ -52,20 +53,29 @@ const Calendar = () => {
 
 
     return (
-        <section className="bg-gradient-to-b from-slate-200 to-slate-300  text-teal-950 py-5 flex flex-col items-center h-fit">
-            <h1 className="text-3xl mb-4">Calendar</h1>
-            <div className="flex flex-row"> {sharedMeals && allMeals && sharedMeals.map((meal, index) => {
-                console.log(meal)
-                console.log(allMeals[index])
-                if (meal[1] !== allMeals[index].userName) {
-                    return (
-                        <>
-                            Sharing <IndividualMeal meal={allMeals[index]} /> </>)
-                }
-                else {
-                    return <>with {meal[1]} on {meal[2]}</>
-                }
-            })}
+        <section className="bg-gradient-to-b from-slate-200 to-slate-300  text-teal-950 py-5 flex flex-wrap items-center h-full pl-4">
+
+            <div className="flex flex-row flex-wrap items-center">
+                {sharedMeals && allMeals && sharedMeals.map((meal, index) => {
+                    if (index % 2 === 0) {
+                        return (
+                            <div key={meal.mealId} className='flex-col text-center'>
+                                <h1 className='text-2xl bg-teal-500 rounded-l-lg '>{meal[2]} </h1>
+                                <div className="flex flex-row items-center">
+                                    <IndividualMeal meal={allMeals[index]} />
+                                </div>
+                            </div>)
+                    }
+                    else {
+                        return (
+                            <div key={meal.userName} className='flex-col text-center mr-1'>
+                                <h1 className='text-2xl bg-teal-500 rounded-r-lg'> {meal[1]}</h1>
+                                <div className="flex flex-row items-center">
+                                    <IndividualMeal meal={allMeals[index]} />
+                                </div>
+                            </div>)
+                    }
+                })}
             </div>
         </section>
     );
