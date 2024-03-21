@@ -27,14 +27,14 @@ const Requests = () => {
     const updateUserMealShares = async ( mealId,senderMeal,day) => {
         const userRef = ref(database, `users/${user.uid}/shared_meals/`);
         
-        await update(userRef,{ [mealId]:`Accepted, giving meal to ${senderMeal.userName} on ${day}`})
-        await update(userRef,{[senderMeal.mealId]:`Accepted, receiving meal from ${senderMeal.userName} on ${day}`})   
+        await update(userRef,{ [mealId]:`Accepted,to,${senderMeal.userName},${day}`})
+        await update(userRef,{[senderMeal.mealId]:`Accepted,from,${senderMeal.userName},${day}`})   
     };
     const updateSenderMealShares = async (mealId,senderMeal,day)=>{
         const senderRef = ref(database, `users/${requestMessage.senderId}/shared_meals/`);
         
-        await update(senderRef,{ [mealId]:`Accepted, receiving meal from ${userData.name} on ${day}`})
-        await update(senderRef,{ [senderMeal.mealId]:`Accepted, giving meal to ${userData.name} on ${day}`})
+        await update(senderRef,{ [mealId]:`Accepted,from,${userData.name},${day}`})
+        await update(senderRef,{ [senderMeal.mealId]:`Accepted,to,${userData.name},${day}`})
            
     }
     const updateMessage = (messageId, newStatus,day,senderMeal) => {
