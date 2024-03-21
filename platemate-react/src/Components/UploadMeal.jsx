@@ -56,8 +56,9 @@ const UploadMeal = () => {
                 },
                 () => {
                     getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                        set(ref(database, `meals/${Date.now()}`), {
-
+                        const mealId = Date.now()
+                        set(ref(database, `meals/${mealId}`), {
+                            mealId,
                             name,
                             description,
                             quantity,

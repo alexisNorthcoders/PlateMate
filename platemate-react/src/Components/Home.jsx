@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { database, auth, storage } from "../config/firebase";
-import { ref, set, get, push } from 'firebase/database';
+import { ref, set, get, push,update } from 'firebase/database';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { UserContext } from '../Components/UserContext';
 import { MyMeals } from './MyMeals';
@@ -10,7 +10,8 @@ const Home = () => {
     const [meals, setMeals] = useState(null)
     const [user, loading, error] = useAuthState(auth);
     const { userData } = useContext(UserContext)
-    console.log(userData)
+    const [isRequestSent,setIsRequestSent]=useState(false)
+    
     useEffect(() => {
         const mealsRef = ref(database, `meals`);
         get(mealsRef).then((snapshot) => {
@@ -25,6 +26,15 @@ const Home = () => {
             });
     }
         , [])
+    const handleClickRequest=(userid, meal) =>{
+        setIsRequestSent(prevStatuses => ({
+            ...prevStatuses,
+            [meal.mealId]: true,
+        }));
+        updateUserMealShares(meal)
+        sendMessage(userid,meal)
+    }
+
     const sendMessage = async (userId, meal) => {
         try {
             const currentDate = new Date();
@@ -33,7 +43,8 @@ const Home = () => {
                 senderName: userData.name,
                 senderAvatar: userData.url,
                 receiverId: userId,
-                content: `wants to PlateMate your ${meal}. Are you interested?`,
+                mealId:meal.mealId,
+                content: `wants to PlateMate your ${meal.name}. Are you interested?`,
                 timestamp: currentDate.toISOString(),
             });
 
@@ -41,6 +52,18 @@ const Home = () => {
             console.error("Error sending message:", error);
 
         }
+    };
+    const updateUserMealShares = async ( meal) => {
+        const userRef = ref(database, `users/${user.uid}/shared_meals/`);
+        
+        update(userRef,{ [meal.mealId]:"pending"})
+            .then(() => {
+                console.log("User shared meals updated successfully");
+                console.log(userData, "userdata in home screen")
+            })
+            .catch((error) => {
+                console.error("Error updating message:", error);
+            });
     };
     return (<>
         <section className="bg-gradient-to-b from-slate-200 to-slate-300  text-teal-950 pt-5 flex flex-col items-center">
@@ -57,7 +80,7 @@ const Home = () => {
                                 <p className="text-sm ">Cook: {meal.userName}</p>
                                 <img src={meal.pictureUrl} alt="meal picture" className="w-32 border-2 rounded-lg border-teal-800 shadow-lg" />
                                 <p className="text-sm ">Quantity: {meal.quantity}</p>
-                                <button onClick={() => { sendMessage(meal.userId, meal.name) }} className='font-bold text-teal-100 bg-teal-600 border-opacity-15 border-2  border-teal-100 drop-shadow-md shadow-teal-950 p-1 rounded-lg  text-sm hover:bg-teal-700 active:bg-teal-800'>PlateMate Request</button>
+                             {isRequestSent[meal.mealId] || userData.shared_meals[meal.mealId] ? <button className='font-bold text-teal-100 bg-teal-950 border-opacity-15 border-2  border-teal-100 drop-shadow-md shadow-teal-950 p-1 rounded-lg  text-sm hover:bg-teal-700 active:bg-teal-800 '>Request Sent</button> : <button onClick={() => { handleClickRequest(meal.userId, meal) }} className='font-bold text-teal-100 bg-teal-600 border-opacity-15 border-2  border-teal-100 drop-shadow-md shadow-teal-950 p-1 rounded-lg  text-sm hover:bg-teal-700 active:bg-teal-800 '>PlateMate Request</button>}   
                             </div>
                         </article>
                     );

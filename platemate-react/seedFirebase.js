@@ -23,11 +23,13 @@ const auth = getAuth(app);
 const data = {
     recipes: [
         {
+            recipeId:0,
             name: "Spaghetti Carbonara",
             ingredients: ["spaghetti", "eggs", "bacon", "parmesan cheese", "black pepper"],
             instructions: "Cook spaghetti, fry bacon, mix with eggs and cheese, season with pepper."
         },
         {
+            recipeId:1,
             name: "Chicken Tikka Masala",
             ingredients: ["chicken", "yogurt", "tomato sauce", "spices", "cream"],
             instructions: "Marinate chicken in yogurt and spices, grill, then simmer in tomato sauce and cream."
@@ -67,10 +69,7 @@ async function deleteData() {
         
         for (const user of users) {
             await signIn(user.email,user.password)
-
-
-
-        }
+}
 
         console.log("Deleting database")
         await remove(ref(database));
@@ -89,12 +88,14 @@ async function seedUsers() {
             const user = userCredential.user;
             console.log("adding users to database")
             await set(ref(database, `users/${user.uid}`), {
+                uid:user.uid,
                 email: user.email,
                 name: users[i].name,
                 url: users[i].url
             });
             console.log("adding meals to database")
             await set(ref(database, `meals/${i}`), {
+                mealId:i,
                 name: meals[i].name,
                 quantity: meals[i].quantity,
                 description:meals[i].description,

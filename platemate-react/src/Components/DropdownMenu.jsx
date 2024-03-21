@@ -1,11 +1,13 @@
 
-export const DropdownMenu = () => {
-    return (<div className="dropdown">
-    <button class="dropbtn">Dropdown</button>
-    <div class="dropdown-content">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
-    </div>
-  </div>)
-}
+const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+export const DropdownMenu = ({handleAccept}) => {
+  
+  return (<>
+      {weekdays.map((day, index) => {
+        return (
+          <div onClick={()=>{handleAccept(day)}}className="flex w-full justify-between py-1 hover:bg-teal-500 cursor-pointer rounded-r-lg border-l-transparent hover:border-l-teal-950 border-l-4" key={index}>
+            <h3 className="font-bold ml-1">{day}</h3>
+          </div>)
+      })}
+   </>)}
+  

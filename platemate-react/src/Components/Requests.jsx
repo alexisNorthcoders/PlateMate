@@ -22,10 +22,10 @@ const Requests = () => {
     const closeModal = () => {
         setShowModal(false);
     };
-    const updateMessage = (messageId, newStatus) => {
+    const updateMessage = (messageId, newStatus,day) => {
         const messageRef = ref(database, `messages/${messageId}`);
 
-        update(messageRef, { status: newStatus })
+        update(messageRef, { status: newStatus,day:day||null })
             .then(() => {
                 console.log("Message updated successfully");
             })
