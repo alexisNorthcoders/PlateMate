@@ -1,7 +1,7 @@
-import React, { useState, useEffect,useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { database, auth, storage } from "../config/firebase";
-import { ref, get, set, update ,remove} from 'firebase/database';
+import { ref, get, set, update, remove, push } from 'firebase/database';
 import { Meals } from './Meals';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
@@ -24,27 +24,39 @@ const Requests = () => {
     const closeModal = () => {
         setShowModal(false);
     };
-    const updateUserMealShares = async ( mealId,senderMeal,day) => {
-        const userRef = ref(database, `users/${user.uid}/shared_meals/`);
-        
-        await update(userRef,{ [mealId]:`Accepted,to,${senderMeal.userName},${day}`})
-        await update(userRef,{[senderMeal.mealId]:`Accepted,from,${senderMeal.userName},${day}`})   
+    const updateMealShares = async (senderMeal, day) => {
+        const mealshareRef = ref(database, `mealShares/`);
+        const mealShare = {
+            mealId_user1: requestMessage.mealId,
+            mealId_user2: senderMeal.mealId,
+            user1_id: userData.uid,
+            user1_name: userData.name,
+            user2_id: senderMeal.userId,
+            user2_name: senderMeal.userName,
+            day
+        }
+        await push(mealshareRef, mealShare)
+        await updateQuantity(senderMeal.mealId)
+        await updateQuantity(requestMessage.mealId)
+
     };
-    const updateSenderMealShares = async (mealId,senderMeal,day)=>{
-        const senderRef = ref(database, `users/${requestMessage.senderId}/shared_meals/`);
-        
-        await update(senderRef,{ [mealId]:`Accepted,from,${userData.name},${day}`})
-        await update(senderRef,{ [senderMeal.mealId]:`Accepted,to,${userData.name},${day}`})
-           
-    }
-    const updateMessage = (messageId, newStatus,day,senderMeal) => {
+    const updateQuantity = async (mealId) => {
+        const mealRef = ref(database, `meals/${mealId}`);
+        const snapshot = await get(mealRef);
+        const currentQuantity = snapshot.val().quantity;
+        const newQuantity = currentQuantity - 1;
+        await update(mealRef, {
+            quantity: newQuantity
+        });
+    };
+
+    const updateMessage = (messageId, newStatus, day, senderMeal) => {
         const messageRef = ref(database, `messages/${messageId}`);
-console.log(senderMeal, "<-- senderMeal")
         update(messageRef, { status: newStatus })
             .then(() => {
                 console.log("Message updated successfully");
-                updateUserMealShares(requestMessage.mealId,senderMeal,day)
-                updateSenderMealShares(requestMessage.mealId,senderMeal,day)
+                updateMealShares(senderMeal, day)
+
             })
             .catch((error) => {
                 console.error("Error updating message:", error);
@@ -52,7 +64,7 @@ console.log(senderMeal, "<-- senderMeal")
     };
     const deleteMessage = (messageId) => {
         const messageRef = ref(database, `messages/${messageId}`);
-    
+
         remove(messageRef)
             .then(() => {
                 console.log("Message deleted successfully");
@@ -65,22 +77,24 @@ console.log(senderMeal, "<-- senderMeal")
     useEffect(() => {
         const messagesRef = ref(database, `messages`);
 
-        get(messagesRef).then((snapshot) => {
+        if (messagesRef) {
+            get(messagesRef).then((snapshot) => {
+                const messagesObject = snapshot.val()
+                if (messagesObject) {
+                    const filteredMessages = [];
+                    Object.entries(messagesObject).forEach(([messageId, message]) => {
+                        if (message.receiverId === user.uid) {
+                            filteredMessages.push({ messageId, ...message });
+                        }
+                    });
 
-
-            const messagesObject = snapshot.val()
-            const filteredMessages = [];
-            Object.entries(messagesObject).forEach(([messageId, message]) => {
-                if (message.receiverId === user.uid) {
-                    filteredMessages.push({ messageId, ...message });
+                    setMessages(filteredMessages)
                 }
-            });
-            console.log(filteredMessages)
-            setMessages(filteredMessages)
-        })
-            .catch((error) => {
-                console.error('Error fetching meals:', error);
-            });
+            })
+                .catch((error) => {
+                    console.error('Error fetching meals:', error);
+                });
+        }
     }
         , [])
     return (
@@ -98,7 +112,7 @@ console.log(senderMeal, "<-- senderMeal")
                                 <p>[{message.timestamp.substring(11, 19)}] <span className='text-lg font-bold'>{message.senderName}</span> {message.content} </p>
                             </div>
                             <div className="flex bg-teal-300 w-fit rounded-sm shadow-teal-600 shadow-inner"> {message.status ? <p className='text-green-900 font-bold'>You have already {message.status} this offer.</p> : <button className='flex h-10 w-24 text-md font-bold text-white justify-center items-center border-0 rounded-md cursor-pointer bg-blue-600 hover:bg-blue-700 active:bg-blue-800  ' onClick={(e) => { handleAccept(e, message) }}>View Offer</button>}
-                            </div> <FontAwesomeIcon icon={faTrash} onClick={()=>{deleteMessage(message.messageId)}}className="text-lg text-red-500 self-end ml-2 mr-2 mt-2 hover:text-red-700 hover:cursor-pointer active:text-red-900" />
+                            </div> <FontAwesomeIcon icon={faTrash} onClick={() => { deleteMessage(message.messageId) }} className="text-lg text-red-500 self-end ml-2 mr-2 mt-2 hover:text-red-700 hover:cursor-pointer active:text-red-900" />
 
                         </div>)
 
