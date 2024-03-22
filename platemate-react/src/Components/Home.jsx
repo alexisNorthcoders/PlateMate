@@ -83,7 +83,7 @@ const Home = () => {
                                 <p className="text-sm ">Notes: {meal.description}</p>
                                 <p className="text-sm ">Cook: {meal.userName}</p>
                                 <img src={meal.pictureUrl} alt="meal picture" className="w-32 border-2 rounded-lg border-teal-800 shadow-lg" />
-                                <p className="text-sm ">{meal.quantity ? `Quantity: ${meal.quantity}`: "Not available"}</p>
+                                <p className="text-sm ">{meal.quantity && meal.quantity > 0? `Quantity: ${meal.quantity}`: "Not available"}</p>
                              {isRequestSent[meal.mealId] || (userData.requestedMeals && userData.requestedMeals[meal.mealId]) ? <div className='font-bold text-teal-950 bg-teal-300 border-opacity-15 border-2  border-teal-100 drop-shadow-md shadow-teal-800 p-1 rounded-lg  text-sm  '>Request Sent</div> : <button disabled={meal.quantity === 0} onClick={() => { handleClickRequest(meal.userId, meal) }} className='font-bold text-teal-100 bg-teal-600 border-opacity-15 border-2  border-teal-100 drop-shadow-md shadow-teal-950 p-1 rounded-lg  text-sm hover:bg-teal-700 active:bg-teal-800 '>PlateMate Request</button>}   
                             </div>
                             
