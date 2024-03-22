@@ -1,11 +1,13 @@
 {
     "users": {
         "userId1": {
-            "name": "User One",
-            "meals": {
-                "mealId1": true,
-                "mealId2": true
-            }
+            "email": "person1@example.com",
+            "name": "John Smith",
+            "requestedMeals": {
+                "mealId": "pending"
+            },
+            "uid": "E2BxdSqZopOocvqGDvPwJZhXYPx1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/platemate-3fe13.appspot.com/o/avatar_change.jpeg?alt=media&token=d632e9fb-0b75-4ff5-a4fb-669884ac8fdd"
         },
         "userId2": {
             "name": "User Two"
@@ -13,30 +15,37 @@
     },
     "meals": {
         "mealId1": {
-            "name": "Meal One",
-            "description": "Tasty meal"
+            "date": "2024-03-22T12:07:49.382Z",
+            "description": "gluten, dairy",
+            "mealId": 0,
+            "name": "Pasta Meatballs",
+            "pictureUrl": "https://firebasestorage.googleapis.com/v0/b/platemate-3fe13.appspot.com/o/meatballs.jpeg?alt=media&token=054ce1a9-cf69-4a49-a9b3-d63017ce5cf3",
+            "quantity": 2,
+            "userId": "E2BxdSqZopOocvqGDvPwJZhXYPx1",
+            "userName": "John"
         },
         "mealId2": {}
     },
     "messages": {
         "messageId1": {
-            "from": "userId1",
-            "to": "userId2",
-            "message": "Would you like to share a meal with me?",
-            "mealId": "mealId1",
-            "timestamp": 1234567890,
-            "status": "sent"
+            "content": "wants to PlateMate your Chicken Fried Rice. Are you interested?",
+            "mealId": 2,
+            "receiverId": "FCxDYnkWbLYOVQtuf6illjjMB5z1",
+            "senderAvatar": "https://firebasestorage.googleapis.com/v0/b/platemate-3fe13.appspot.com/o/avatar_change.jpeg?alt=media&token=d632e9fb-0b75-4ff5-a4fb-669884ac8fdd",
+            "senderId": "E2BxdSqZopOocvqGDvPwJZhXYPx1",
+            "senderName": "John Smith",
+            "timestamp": "2024-03-22T12:11:03.241Z"
         }
     },
     "mealShares": {
         "shareId1": {
-          "mealId_user1": "mealId1",
-          "mealId_user2": "mealId1",
-          "user1_id": "userId1",
-          "user1_name": "User1",
-          "user2_id": "userId2",
-          "user2_name": "User2",
-          "sharedAt": "timestamp"
+            "mealId_user1": "mealId1",
+            "mealId_user2": "mealId1",
+            "user1_id": "userId1",
+            "user1_name": "User1",
+            "user2_id": "userId2",
+            "user2_name": "User2",
+            "sharedAt": "timestamp"
         }
-      }
+    }
 }
