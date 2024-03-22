@@ -8,10 +8,14 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 export const MyMeals = () => {
     const [user, loading, error] = useAuthState(auth);
     const [meals, setMeals] = useState(null)
+    const [successMessage,setSucessMessage]=useState("")
     const handleTrashIconClick = (mealId) => {
+        const newMeals = meals.filter(meal => meal.mealId !== mealId);
+        setMeals(newMeals);
         const mealRef = ref(database, `/meals/${mealId}`);
                         remove(mealRef).then(() => {
                             console.log('Meal removed from the database.');
+                            setSucessMessage("Meal removed!")
                         }).catch((error) => {
                             console.error('Error removing meal:', error);
                         });
@@ -33,7 +37,7 @@ export const MyMeals = () => {
         }
     }
         , [user]);
-    return (<>
+    return (<><h1 className='text-red-500 text-2xl'>{successMessage}</h1>
         {meals && meals.map((meal, index) => {
             return (
                 <article key={index} className="w-[230px] text-black p-0.5 mx-2 my-4 max-w-sm bg-gradient-to-br from-teal-200 via-teal-600 to-teal-900 rounded-lg shadow-lg items-center ">

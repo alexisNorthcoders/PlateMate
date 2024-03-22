@@ -9,8 +9,12 @@ export const Meals = ({ requestMessage, closeModal, updateMessage }) => {
     const [meals, setMeals] = useState(null)
     const [loadedImages, setLoadedImages] = useState({});
     const [isAccept, setIsAccept] = useState(false)
-    
+    const [chosenMealId, setChosenMealId] = useState("")
+    const [chosenMeal, setChosenMeal] = useState(null)
+
+
     const handleImageLoaded = (mealId) => {
+        console.log(mealId)
         setLoadedImages({ ...loadedImages, [mealId]: true });
     };
     const handleClickAccept = () => {
@@ -33,8 +37,8 @@ export const Meals = ({ requestMessage, closeModal, updateMessage }) => {
         await updateMessage(requestMessage.messageId, "declined")
         closeModal()
     }
-    const handleAccept = async (day,mealId) => {
-        await updateMessage(requestMessage.messageId, "accepted",day,meals[0])
+    const handleAccept = async (day, chosenMeal) => {
+        await updateMessage(requestMessage.messageId, "accepted", day, chosenMeal)
         closeModal()
     }
 
@@ -52,43 +56,48 @@ export const Meals = ({ requestMessage, closeModal, updateMessage }) => {
                     role="dialog"
                     aria-modal="true"
                     aria-labelledby="modal-headline"
-                > <div className="flex flex-row justify-between items-center"><h1 className="py-1 ml-2">{isAccept ? "Choose the day" : "Available meals"}</h1><FontAwesomeIcon icon={faXmark} onClick={closeModal} className="mr-2 bg-red-500 text-white rounded-sm px-0.5 shadow-lg hover:bg-red-600 active:bg-red-700 active:transform active:scale-75 transition-transform duration-150 " /></div>
+                > <div className="flex flex-row justify-between items-center"><h1 className="py-1 ml-2">{isAccept ? "Choose the day" : "Select a meal"}</h1><FontAwesomeIcon icon={faXmark} onClick={closeModal} className="mr-2 bg-red-500 text-white rounded-sm px-0.5 shadow-lg hover:bg-red-600 active:bg-red-700 active:transform active:scale-75 transition-transform duration-150 " /></div>
                     <div className="bg-teal-100  px-4 border-teal-700 border-t-2 border-b-2 pb-2 ">
-                        
+
                         <div className={`flex flex-col align-middle items-center`}>
                             <div className="mt-3 ">
-
-                                {meals && meals.map((meal) => {
+                                {isAccept ? <DropdownMenu handleAccept={handleAccept} chosenMeal={chosenMeal} /> : <>{meals && meals.map((meal) => {
                                     return (
-                                        <div key={meal.id} className="flex flex-col shadow-lg rounded-lg mb-2 ">
-                                            {isAccept ? <DropdownMenu handleAccept={handleAccept} mealId={meal.id} /> : <><h2 className="">{meal.name}</h2>
-                                            <div className={loadedImages[meal.id] ? '' : 'image-placeholder'}>
+                                        <div key={meal.id} className="flex flex-col shadow-lg rounded-lg mb-2 font-bold">
+                                            <h2 >{meal.name}</h2>
+                                            <div className={loadedImages[meal.id] ? 'hover:cursor-pointer ' : 'image-placeholder'}>
                                                 {!loadedImages[meal.id] && <div className="spinner"></div>}
-                                                <img
+
+                                                <img onClick={() => {
+                                                    setChosenMealId(meal.mealId)
+                                                    setChosenMeal(meal)
+                                                }}
                                                     src={meal.pictureUrl}
                                                     alt={`Picture of ${meal.name}`}
-                                                    className={`w-44 rounded-lg shadow-md ${loadedImages[meal.id] ? 'visible' : 'hidden'}`}
+                                                    className={` w-44 rounded-lg shadow-md  ${chosenMealId === meal.mealId ? 'opacity-100 duration-300' : 'opacity-30'} ${loadedImages[meal.id] ? 'visible' : 'hidden'}`}
                                                     onLoad={() => handleImageLoaded(meal.id)}
                                                 />
-                                            </div></>}
+                                            
+                                        </div>
                                            
                                         </div>
-                                    );
-                                })}
-                            </div>
+                                );
+                                })}</>}
+
                         </div>
-                    </div>{isAccept ? null :  <div className="bg-teal-800 py-1 flex flex-row justify-center">
-                        <button onClick={() => { handleClickAccept() }} className=" bg-green-600 text-white font-bold py-2 px-4 mx-2 rounded focus:outline-none hover:bg-green-700 active:bg-green-800 active:transform active:scale-95 transition-transform duration-150  sm:w-auto sm:text-sm" > Accept</button>
-                        <button
-                            type="button"
-                            className="bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none hover:bg-red-700 active:bg-red-800 active:transform active:scale-95 transition-transform duration-150 sm:w-auto sm:text-sm"
-                            onClick={() => { handleDecline(requestMessage.messageId) }}
-                        >
-                            Decline
-                        </button>
-                    </div>}
-                   
-                </div>
+                    </div>
+                </div>{isAccept ? null : <div className="bg-teal-800 py-1 flex flex-row justify-center">
+                    <button onClick={() => { handleClickAccept() }} className=" bg-green-600 text-white font-bold py-2 px-4 mx-2 rounded focus:outline-none hover:bg-green-700 active:bg-green-800 active:transform active:scale-95 transition-transform duration-150  sm:w-auto sm:text-sm" > Accept</button>
+                    <button
+                        type="button"
+                        className="bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none hover:bg-red-700 active:bg-red-800 active:transform active:scale-95 transition-transform duration-150 sm:w-auto sm:text-sm"
+                        onClick={() => { handleDecline(requestMessage.messageId) }}
+                    >
+                        Decline
+                    </button>
+                </div>}
+
             </div>
-        </div>)
+        </div>
+        </div >)
 }
