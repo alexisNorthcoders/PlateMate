@@ -1,0 +1,42 @@
+{
+    "users": {
+        "userId1": {
+            "name": "User One",
+            "meals": {
+                "mealId1": true,
+                "mealId2": true
+            }
+        },
+        "userId2": {
+            "name": "User Two"
+        }
+    },
+    "meals": {
+        "mealId1": {
+            "name": "Meal One",
+            "description": "Tasty meal"
+        },
+        "mealId2": {}
+    },
+    "messages": {
+        "messageId1": {
+            "from": "userId1",
+            "to": "userId2",
+            "message": "Would you like to share a meal with me?",
+            "mealId": "mealId1",
+            "timestamp": 1234567890,
+            "status": "sent"
+        }
+    },
+    "mealShares": {
+        "shareId1": {
+          "mealId_user1": "mealId1",
+          "mealId_user2": "mealId1",
+          "user1_id": "userId1",
+          "user1_name": "User1",
+          "user2_id": "userId2",
+          "user2_name": "User2",
+          "sharedAt": "timestamp"
+        }
+      }
+}
