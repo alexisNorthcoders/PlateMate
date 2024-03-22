@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { database, auth, storage } from "../config/firebase";
-import { ref, get } from 'firebase/database';
+import { ref, get ,update} from 'firebase/database';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { MyMeals } from './MyMeals';
 import { UserContext } from '../Components/UserContext';
@@ -57,6 +57,16 @@ const Profile = () => {
                 () => {
                     getDownloadURL(uploadTask.snapshot.ref).then((url) => {
                         setProfilePictureUrl(url);
+                        
+                        const userRef = ref(database, `/users/${userData.uid}`);
+              
+                        update(userRef, {
+                          url: url,
+                        }).then(() => {
+                          console.log('Profile picture URL updated in the database.');
+                        }).catch((error) => {
+                          console.error('Error updating profile picture URL in the database:', error);
+                        });
                     });
                 }
             );
