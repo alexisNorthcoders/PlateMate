@@ -51,6 +51,14 @@ const Requests = () => {
     };
 
     const updateMessage = (messageId, newStatus, day, senderMeal) => {
+        const updatedMessages = messages.map(msg => {
+            if (msg.messageId === messageId) {
+                return { ...msg, status: 'accepted' }; // Update the status
+            }
+            return msg;
+        })
+        setMessages(updatedMessages);
+
         const messageRef = ref(database, `messages/${messageId}`);
         update(messageRef, { status: newStatus })
             .then(() => {
@@ -114,7 +122,7 @@ const Requests = () => {
                                 </div>
                                 <p>[{message.timestamp.substring(11, 19)}] <span className='text-lg font-bold'>{message.senderName}</span> {message.content} </p>
                             </div>
-                            <div className="flex bg-teal-300 w-fit rounded-sm shadow-teal-600 shadow-inner"> {message.status ? <p className='text-green-900 font-bold'>You have already {message.status} this offer.</p> : <button className='flex h-10 w-24 text-md font-bold text-white justify-center items-center border-0 rounded-md cursor-pointer bg-blue-600 hover:bg-blue-700 active:bg-blue-800  ' onClick={(e) => { handleAccept(e, message) }}>View Offer</button>}
+                            <div className="flex bg-teal-300 w-fit rounded-sm shadow-teal-600 shadow-inner"> {message.status ? <p className='text-green-900 font-bold'>You have {message.status} this offer.</p> : <button className='flex h-10 w-24 text-md font-bold text-white justify-center items-center border-0 rounded-md cursor-pointer bg-blue-600 hover:bg-blue-700 active:bg-blue-800  ' onClick={(e) => { handleAccept(e, message) }}>View Offer</button>}
                             </div> <FontAwesomeIcon icon={faTrash} onClick={() => { deleteMessage(message.messageId) }} className="text-lg text-red-500 self-end ml-2 mr-2 mt-2 hover:text-red-700 hover:cursor-pointer active:text-red-900" />
 
                         </div>)
