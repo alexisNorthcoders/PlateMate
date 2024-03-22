@@ -2,6 +2,8 @@ import React from 'react';
 import { useState,useEffect } from 'react';
 import { Outlet } from "react-router-dom";
 import NavigationBar from './Components/NavigationBar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 
 function App() {
@@ -14,11 +16,14 @@ function App() {
     setShowNavBar(!showNavBar);
   };
   const handleResize = () => {
-    setIsMobile(window.innerWidth <= 520);
-    if (window.innerWidth <= 520){
+    setIsMobile(window.innerWidth <= 768);
+    console.log(window.innerWidth)
+    console.log(isMobile)
+    if (window.innerWidth <= 768){
       setShowNavBar(false)
+      console.log(showNavBar)
     }
-    else if (window.innerWidth > 520){
+    else if (window.innerWidth > 768){
       setShowNavBar(true)
     }
   };
@@ -40,21 +45,21 @@ function App() {
   }, []);
 
   return (
-    <div className="flex">
+    <div className="relative min-h-screen flex">
        {isMobile ? (
         <div className="fixed top-0 left-0 p-4">
           <button onClick={toggleNavBar}>
             
-            <span className="block w-6 h-1 bg-white rounded-full mb-1  hover:bg-conifer-950"></span>
+          <FontAwesomeIcon className="text-4xl"icon={faBars} />
          
           </button>
         </div>
       ) : null}
-      {showNavBar && <div className="sticky top-0 h-screen" onMouseLeave={handleMouseLeave}>
+      <div className={`absolute inset-y-0 left-0 transform ${!showNavBar ? "-translate-x-full":null} md:relative md:translate-x-0 transition duration-200 ease-in-out`} onMouseLeave={handleMouseLeave}>
       <NavigationBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
-    </div>}
+      </div>
     
-    <div className="flex-1">
+    <div className="bg-teal-900 flex-1 p-4">
       <Outlet />
     </div>
   </div>

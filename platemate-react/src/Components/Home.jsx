@@ -66,7 +66,7 @@ const Home = () => {
             });
     };
     return (<>
-        <section className="bg-gradient-to-b from-slate-200 to-slate-300  text-teal-950 pt-5 flex flex-col items-center">
+        <section className="bg-gradient-to-b from-slate-200 to-slate-300  text-teal-950 pt-5 flex flex-col items-center ">
 
             <h1 className="text-3xl mb-4 ">Available Meals</h1>
             <div className="flex flex-wrap justify-around">
@@ -88,9 +88,9 @@ const Home = () => {
 
             </div>
         </section>
-        <section className="bg-gradient-to-b from-slate-300 to-slate-400  text-teal-950 flex flex-col items-center ">
+        <section className="bg-gradient-to-b from-slate-300 to-slate-400  text-teal-950 flex flex-col items-center">
             <h1 className="text-3xl mb-4">My Meals</h1>
-            <div className="flex flex-wrap justify-around">
+            <div className="flex justify-around">
                 <MyMeals />
             </div>
         </section>

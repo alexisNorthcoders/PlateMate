@@ -35,9 +35,9 @@ export default function NavigationBar({ loggedIn, setLoggedIn }) {
   }, [user]);
 
   return (
-    <div className='bg-teal-950 p-2 h-screen'>
+    <div className='bg-gradient-to-b from-slate-300 to-teal-800  p-2 h-full'>
       <nav className='flex flex-col items-center'>
-        {user && <img src={profilePictureUrl} alt="Profile" className="w-32 border-2 border-black rounded-full hover:border-yellow-300 shadow-lg"/>}
+      <img src="PlateMate.png" alt="Plate Mate Logo" className="mx-auto w-40 mb-2" />
         <ul className='items-center justify-center'>
           <li> <Link className=' flex h-12 w-40 text-lg font-bold text-white justify-center items-center border-0 rounded-md cursor-pointer bg-teal-700 hover:bg-teal-800 active:bg-teal-900 mb-2 ' to={loggedIn ? "Home" : "/"}>Home</Link></li>
           {loggedIn && <> <li> <Link className='flex h-12 w-40 text-lg font-bold text-white justify-center items-center border-0 rounded-md cursor-pointer bg-teal-700 hover:bg-teal-800 active:bg-teal-900 mb-2' to={`Calendar`}>Calendar</Link></li>
@@ -48,6 +48,7 @@ export default function NavigationBar({ loggedIn, setLoggedIn }) {
           <li><Auth loggedIn={loggedIn} setLoggedIn={setLoggedIn} /></li>
 
         </ul>
+        {user && <img src={profilePictureUrl} alt="Profile" className="w-32 border-2 border-black rounded-full mb-1 shadow-lg"/>}
       </nav>
     </div>
   );
