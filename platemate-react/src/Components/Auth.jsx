@@ -1,6 +1,5 @@
 import { signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
-import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightFromBracket, faRightToBracket } from '@fortawesome/free-solid-svg-icons'
