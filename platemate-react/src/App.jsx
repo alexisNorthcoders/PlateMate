@@ -4,12 +4,19 @@ import { Outlet } from "react-router-dom";
 import NavigationBar from './Components/NavigationBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { LoginModal } from './Components/LoginModal';
 
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [showNavBar, setShowNavBar] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+
+  const toggleModal = () => {
+    setShowModal(prev=>!prev);
+    console.log(showModal)
+  };
 
 
   const toggleNavBar = () => {
@@ -51,10 +58,11 @@ function App() {
         </div>
       ) : null}
       <div className={`absolute inset-y-0 left-0 transform ${!showNavBar ? "-translate-x-full" : null} md:relative md:translate-x-0 transition duration-200 ease-in-out`} onMouseLeave={handleMouseLeave}>
-        <NavigationBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+        <NavigationBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} toggleModal={toggleModal} />
       </div>
 
       <div className="bg-teal-600 flex-1 p-0.5">
+        <LoginModal showModal={showModal} toggleModal={toggleModal}/>
         <Outlet />
       </div>
     </div>
