@@ -7,7 +7,7 @@ import { UserContext } from '../Components/UserContext';
 import { uploadBytesResumable, getDownloadURL, ref as storageRef } from 'firebase/storage';
 
 const Profile = () => {
-    const [profilePictureUrl, setProfilePictureUrl] = useState(null);
+    const [profilePictureUrl, setProfilePictureUrl] = useState('');
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState('');
     const [allergies, setAllergies] = useState('');
