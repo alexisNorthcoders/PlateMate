@@ -2,12 +2,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import { database, auth, storage } from "../config/firebase";
 import { ref, set, get, push, update } from 'firebase/database';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { UserContext } from '../Components/UserContext';
+import { UserContext } from './UserContext';
 import { IndividualMeal } from './IndividualMealCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRightLeft } from '@fortawesome/free-solid-svg-icons'
 
-const Calendar = () => {
+const PlateMate = () => {
     const [user, loading, error] = useAuthState(auth);
     const [sharedMeals, setSharedMeals] = useState(null)
 
@@ -32,9 +32,12 @@ const Calendar = () => {
 
         }
     }, [user]);
+    if (!user) {
+        return <div>Please sign in to view your profile.</div>;
+    }
     return (
-        <section className="bg-gradient-to-b from-slate-200 to-slate-300  text-teal-950 pt-5 flex flex-col items-center h-screen ">
-            <h1 className="text-3xl mb-4 ">Scheduled Meals</h1>
+        <section className="bg-gradient-to-b from-slate-200 to-slate-300  text-teal-950 pt-5 flex flex-col items-center h-full ">
+            <h1 className="text-3xl mb-4 ">PlateMate Meals</h1>
             <div className="flex flex-wrap justify-around">
                 {sharedMeals && sharedMeals.map((meal, index) => {
 
@@ -58,4 +61,4 @@ const Calendar = () => {
 };
 
 
-export default Calendar;
+export default PlateMate;

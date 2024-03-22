@@ -65,6 +65,9 @@ const Home = () => {
                 console.error("Error updating message:", error);
             });
     };
+    if (!user) {
+        return <div>Please sign in to view your profile.</div>;
+    }
     return (<>
         <section className="bg-gradient-to-b from-slate-200 to-slate-300  text-teal-950 p-5 flex flex-col items-center flex-auto h-full">
 

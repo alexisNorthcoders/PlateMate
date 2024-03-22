@@ -102,12 +102,12 @@ export const Auth = ({ loggedIn, setLoggedIn }) => {
       {!loggedIn ? (
         <>
           <button
-            className="btn w-full bg-blue-500 text-white font-bold py-2 px-4 mb-1 rounded focus:outline-none hover:bg-blue-700 active:bg-blue-800 active:transform active:scale-95 transition-transform duration-150"
+            className="flex h-12 w-40 text-lg font-bold text-white justify-center items-center border-0 rounded-md cursor-pointer bg-blue-600  hover:bg-blue-700 active:bg-blue-800 active:transform active:scale-95 transition-transform duration-150"
             onClick={openModal}
           ><div className="flex flex-row justify-between items-center"><span className=""></span><span className="">Log In</span><FontAwesomeIcon className=""icon={faRightToBracket} /></div>
           </button>
           {showModal && (
-            <div className="fixed z-10 inset-0 overflow-y-auto">
+            <div className="fixed top-0 z-1">
               <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div className="fixed inset-0 transition-opacity" aria-hidden="true">
                   <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -121,7 +121,7 @@ export const Auth = ({ loggedIn, setLoggedIn }) => {
                   aria-modal="true"
                   aria-labelledby="modal-headline"
                 >
-                  <div className="bg-teal-700  px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                  <div className="bg-teal-600  px-4 pt-5 pb-4 sm:p-6 sm:pb-4 w-screen">
                     <div className="sm:flex sm:items-start">
                       <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                         <div>Sign is as: <button className="bg-yellow-500 ml-1 rounded" onClick={handleJohnClick}>John</button><button className="bg-yellow-500 ml-1 rounded" onClick={handleAliceClick}>Alice</button><button className="bg-yellow-500 ml-1 rounded" onClick={handleArthurClick}>Arthur</button><button className="bg-yellow-500 ml-1 rounded" onClick={handleJaneClick}>Jane</button></div>

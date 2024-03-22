@@ -97,6 +97,9 @@ const Requests = () => {
         }
     }
         , [])
+        if (!user) {
+            return <div>Please sign in to view your profile.</div>;
+        }
     return (
         <section className="bg-gradient-to-b from-slate-200 to-slate-300  text-teal-950 py-5 flex flex-col items-center h-full">
             {showModal && <Meals requestMessage={requestMessage} closeModal={closeModal} updateMessage={updateMessage} />}

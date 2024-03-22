@@ -11,12 +11,12 @@ import {
 import ErrorPage from './Components/ErrorPage.jsx';
 import Profile from './Components/Profile.jsx';
 import Requests from './Components/Requests.jsx';
-import Calendar from './Components/Calendar.jsx';
 import UploadMeal from './Components/UploadMeal.jsx';
 import Home from './Components/Home.jsx';
 import Hero from './Components/Hero.jsx';
 import AboutPage from './Components/About.jsx';
 import { UserProvider } from './Components/UserContext'
+import PlateMate from './Components/PlateMate.jsx';
 
 
 const router = createBrowserRouter([
@@ -35,8 +35,8 @@ const router = createBrowserRouter([
         element: <AboutPage />,
       },
       {
-        path: "Calendar",
-        element: <Calendar />,
+        path: "PlateMate",
+        element: <PlateMate />,
       },
       {
         path: "Requests",

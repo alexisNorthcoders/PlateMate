@@ -40,14 +40,15 @@ export default function NavigationBar({ loggedIn, setLoggedIn }) {
       <img src="PlateMate.png" alt="Plate Mate Logo" className="mx-auto w-40 mb-2" />
         <ul className='items-center justify-center'>
           <li> <Link className=' flex h-12 w-40 text-lg font-bold text-white justify-center items-center border-0 rounded-md cursor-pointer bg-teal-700 hover:bg-teal-800 active:bg-teal-900 mb-2 ' to={loggedIn ? "Home" : "/"}>Home</Link></li>
-          {loggedIn && <> <li> <Link className='flex h-12 w-40 text-lg font-bold text-white justify-center items-center border-0 rounded-md cursor-pointer bg-teal-700 hover:bg-teal-800 active:bg-teal-900 mb-2' to={`Calendar`}>Calendar</Link></li>
+          {loggedIn && <> <li> <Link className='flex h-12 w-40 text-lg font-bold text-white justify-center items-center border-0 rounded-md cursor-pointer bg-teal-700 hover:bg-teal-800 active:bg-teal-900 mb-2' to={`PlateMate`}>PlateMate Meals</Link></li>
             <li> <Link className='flex h-12 w-40 text-lg font-bold text-white justify-center items-center border-0 rounded-md cursor-pointer bg-teal-700 hover:bg-teal-800 active:bg-teal-900 mb-2' to={`Requests`}>Requests</Link></li>
             <li> <Link className='flex h-12 w-40 text-lg font-bold text-white justify-center items-center border-0 rounded-md cursor-pointer bg-teal-700 hover:bg-teal-800 active:bg-teal-900 mb-2' to={`Profile`}>Profile</Link></li>
             <li> <Link className='flex h-12 w-40 text-lg font-bold text-white justify-center items-center border-0 rounded-md cursor-pointer bg-teal-700 hover:bg-teal-800 active:bg-teal-900 mb-2' to={`UploadMeal`}>Upload Meal</Link></li></>}
 
-          <li><Auth loggedIn={loggedIn} setLoggedIn={setLoggedIn} /></li>
+         
 
         </ul>
+        <Auth loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         {user && <img src={profilePictureUrl} alt="Profile" className="w-32 border-2 border-black rounded-full mb-1 shadow-lg"/>}
       </nav>
     </div>
