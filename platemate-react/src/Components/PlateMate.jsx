@@ -7,9 +7,11 @@ import { IndividualMeal } from './IndividualMealCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRightLeft } from '@fortawesome/free-solid-svg-icons'
 
+
 const PlateMate = () => {
     const [user, loading, error] = useAuthState(auth);
     const [sharedMeals, setSharedMeals] = useState(null)
+    const { userData } = useContext(UserContext)
 
     useEffect(() => {
         if (user) {
@@ -20,7 +22,7 @@ const PlateMate = () => {
                     const mealsArray = Object.keys(data).map(key => ({
                         ...data[key],
                         id: key,
-                    }));
+                    })).filter(meal => meal.user1_id === userData.uid || meal.user2_id === userData.uid);
                     setSharedMeals(mealsArray);
 
                 } else {

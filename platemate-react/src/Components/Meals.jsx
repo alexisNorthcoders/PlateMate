@@ -27,6 +27,10 @@ export const Meals = ({ requestMessage, closeModal, updateMessage }) => {
 
             const filteredMeals = mealsData.filter((meal) => meal.userId === requestMessage.senderId)
             setMeals(filteredMeals)
+            if (filteredMeals.length===1){
+                setChosenMeal(filteredMeals[0])
+                setChosenMealId(filteredMeals[0].mealId)
+            }
         })
             .catch((error) => {
                 console.error('Error fetching meals:', error);
