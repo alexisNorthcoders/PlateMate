@@ -33,14 +33,15 @@ const Calendar = () => {
         }
     }, [user]);
     return (
-        <section className="bg-gradient-to-b from-slate-200 to-slate-300  text-teal-950 pt-5 flex flex-col items-center h-screen">
-            <h1 className="text-3xl mb-4 ">Available Meals</h1>
+        <section className="bg-gradient-to-b from-slate-200 to-slate-300  text-teal-950 pt-5 flex flex-col items-center h-screen ">
+            <h1 className="text-3xl mb-4 ">Scheduled Meals</h1>
             <div className="flex flex-wrap justify-around">
                 {sharedMeals && sharedMeals.map((meal, index) => {
 
                     return (
-                        <div key={meal.id} className='flex-col text-center'>
-                            <h1 className='text-2xl bg-teal-500 rounded-lg '>{meal.day} </h1>
+                        <div key={meal.id} className='flex-col text-center mx-2'>
+                            <div className='text-2xl bg-gradient-to-b from-teal-200 to-teal-600 p-1 rounded-lg '>
+                            <h1 className='text-2xl bg-white  rounded-lg '>{meal.day} </h1></div>
                             <div className="flex flex-row items-center">
                                 <IndividualMeal mealId={meal.mealId_user1} />
                                 <FontAwesomeIcon className="text-3xl" icon={faRightLeft} />
