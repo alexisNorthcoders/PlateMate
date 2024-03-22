@@ -59,7 +59,7 @@ function App() {
       <NavigationBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       </div>
     
-    <div className="bg-teal-900 flex-1 p-4">
+    <div className="bg-teal-600 flex-1 p-1">
       <Outlet />
     </div>
   </div>

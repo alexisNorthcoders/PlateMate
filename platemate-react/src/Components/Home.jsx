@@ -66,7 +66,7 @@ const Home = () => {
             });
     };
     return (<>
-        <section className="bg-gradient-to-b from-slate-200 to-slate-300  text-teal-950 pt-5 flex flex-col items-center ">
+        <section className="bg-gradient-to-b from-slate-200 to-slate-300  text-teal-950 p-5 flex flex-col items-center flex-auto h-full">
 
             <h1 className="text-3xl mb-4 ">Available Meals</h1>
             <div className="flex flex-wrap justify-around">
@@ -82,18 +82,18 @@ const Home = () => {
                                 <p className="text-sm ">{meal.quantity ? `Quantity: ${meal.quantity}`: "Not available"}</p>
                              {isRequestSent[meal.mealId] || (userData.requestedMeals && userData.requestedMeals[meal.mealId]) ? <div className='font-bold text-teal-950 bg-teal-300 border-opacity-15 border-2  border-teal-100 drop-shadow-md shadow-teal-800 p-1 rounded-lg  text-sm  '>Request Sent</div> : <button onClick={() => { handleClickRequest(meal.userId, meal) }} className='font-bold text-teal-100 bg-teal-600 border-opacity-15 border-2  border-teal-100 drop-shadow-md shadow-teal-950 p-1 rounded-lg  text-sm hover:bg-teal-700 active:bg-teal-800 '>PlateMate Request</button>}   
                             </div>
+                            
                         </article>
                     );
                 })}
 
             </div>
-        </section>
-        <section className="bg-gradient-to-b from-slate-300 to-slate-400  text-teal-950 flex flex-col items-center">
             <h1 className="text-3xl mb-4">My Meals</h1>
             <div className="flex justify-around">
                 <MyMeals />
             </div>
         </section>
+     
     </>
     );
 };
