@@ -66,6 +66,7 @@ const Home = () => {
             });
     };
     if (!user) {
+        console.log(user,"user in home")
         return <div>Please sign in to view your profile.</div>;
     }
     return (<>

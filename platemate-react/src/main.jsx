@@ -17,6 +17,7 @@ import Hero from './Components/Hero.jsx';
 import AboutPage from './Components/About.jsx';
 import { UserProvider } from './Components/UserContext'
 import PlateMate from './Components/PlateMate.jsx';
+import { Recipes } from './Components/Recipes.jsx';
 
 
 const router = createBrowserRouter([
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
         path: "home",
         element: <Home />,
       },
+      {
+        path: "recipes",
+        element: <Recipes/>
+      }
     ],
   },
 
